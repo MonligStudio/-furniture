@@ -58,13 +58,15 @@ export function MediaScrub() {
   const pathname = usePathname();
 
   useEffect(() => {
-    /* Mobilde her görsel için sürekli transform/tilt hesabı yapmak yerine
-       normal belge akışı kullanılır. Masaüstündeki derinlik korunur. */
-    if (
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce), (pointer: coarse), (max-width: 47.99em)",
-      ).matches
-    ) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    /* Efekt telefonda da korunur; yalnızca hareket mesafesi küçültülür.
+       Böylece GSAP derinliği kaybolmadan küçük ekran GPU/bellek bütçesine
+       daha uygun çalışır. Lenis mobilde kapalı olduğu için yerli scroll'un
+       gecikmesiz hissi de korunur. */
+    const compact = window.matchMedia(
+      "(pointer: coarse), (max-width: 47.99em)",
+    ).matches;
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -84,14 +86,19 @@ export function MediaScrub() {
         const host = el.parentElement ?? el;
         sceneOf(host).back.push({
           el,
-          amount: Number(el.dataset.scrubAmount || 11),
+          amount: compact
+            ? Math.min(Number(el.dataset.scrubAmount || 11), 5)
+            : Number(el.dataset.scrubAmount || 11),
         });
 
         /* Görünür alana ilk girişte maskeyle açılış — tek seferlik, ayrı
            aralık, o yüzden sahnenin zaman çizelgesine girmiyor. */
         gsap.fromTo(
           el,
-          { clipPath: "inset(14% 0% 0% 0%)", scale: 1.12 },
+          {
+            clipPath: `inset(${compact ? 8 : 14}% 0% 0% 0%)`,
+            scale: compact ? 1.05 : 1.12,
+          },
           {
             clipPath: "inset(0% 0% 0% 0%)",
             scale: 1,
@@ -104,7 +111,11 @@ export function MediaScrub() {
 
       gsap.utils.toArray<HTMLElement>("[data-depth]").forEach((el) => {
         const host = el.parentElement ?? el;
-        sceneOf(host).back.push({ el, amount: Number(el.dataset.depth || 8) });
+        const amount = Number(el.dataset.depth || 8);
+        sceneOf(host).back.push({
+          el,
+          amount: compact ? Math.min(amount, 4) : amount,
+        });
       });
 
       gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
@@ -114,12 +125,15 @@ export function MediaScrub() {
           el;
         sceneOf(host).fore.push({
           el,
-          amount: Number(el.dataset.parallax || 34),
+          amount: compact
+            ? Math.min(Number(el.dataset.parallax || 34), 16)
+            : Number(el.dataset.parallax || 34),
         });
       });
 
       gsap.utils.toArray<HTMLElement>("[data-tilt]").forEach((el) => {
-        sceneOf(el).tilt = Number(el.dataset.tilt || 3);
+        const tilt = Number(el.dataset.tilt || 3);
+        sceneOf(el).tilt = compact ? Math.min(tilt, 1) : tilt;
       });
 
       /* --- Sahne başına tek zaman çizelgesi, tek tetikleyici --- */

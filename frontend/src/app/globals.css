@@ -191,6 +191,10 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {
@@ -199,7 +203,24 @@
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.68;
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
+    overflow-x: clip;
+  }
+
+  main,
+  section,
+  header,
+  footer {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  img,
+  video,
+  svg {
+    max-width: 100%;
   }
 
   /* Başlıklar logodaki ağır grotesk karakterini taşır: kalın, büyük harf,
@@ -247,12 +268,17 @@
   .page-layer {
     position: relative;
     z-index: 1;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: clip;
     background-color: var(--color-ink-950);
   }
 
   /* Sayfa kabı — tüm bölümler bunu kullanır. */
   .shell {
     width: 100%;
+    min-width: 0;
     max-width: 1440px;
     margin-inline: auto;
     padding-inline: clamp(1.25rem, 4vw, 3.5rem);
@@ -434,6 +460,7 @@
     line-height: 1.4;
     letter-spacing: 0.26em;
     color: var(--color-fg-muted);
+    overflow-wrap: anywhere;
   }
 
   /* Dev başlık — logodaki ağır grotesk. Harf aralığı sıkıştırılmaz. */
@@ -645,13 +672,11 @@
     overflow-wrap: anywhere;
   }
 
-  /* Mobilde parallax motoru kurulmaz; taşkın katman ve kalıcı compositor
-     belleği de bırakılmaz. */
+  /* Mobilde GSAP parallax korunur; taşkın payı ve katman belleği küçülür. */
   .media-scrub,
   .depth-layer {
-    inset: 0;
-    transform: none !important;
-    will-change: auto;
+    inset: -10%;
+    max-width: none;
   }
 
   .media-frame:hover img {

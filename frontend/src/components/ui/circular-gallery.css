@@ -2,6 +2,8 @@
 @media (max-width: 47.99em), (pointer: coarse) {
   .cg {
     display: block;
+    width: 100%;
+    max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -17,6 +19,7 @@
   .cg-ring {
     display: flex;
     width: max-content;
+    max-width: none;
     gap: 1rem;
     padding-inline: 1.25rem;
     transform: none !important;
