@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "2026-salon-koleksiyonu",
+    "title": "2026 Salon Koleksiyonu",
+    "year": 2026,
+    "pageCount": 8,
+    "featured": true,
+    "summary": "Salon ve köşe takımlarının tamamı; kumaş kartelası, ölçü şeması ve modül seçenekleriyle.",
+    "description": "Yılın salon kurgusunu tek dosyada topladık. Her takımın oturum derinliği, kol yüksekliği ve modül şeması sayfalarda yer alıyor; kumaş kartelası son bölümde.",
+    "cover": "/catalog-dark/2026-salon-koleksiyonu/kapak.webp",
+    "pages": [
+      "/catalog-dark/2026-salon-koleksiyonu/01.webp",
+      "/catalog-dark/2026-salon-koleksiyonu/02.webp",
+      "/catalog-dark/2026-salon-koleksiyonu/03.webp",
+      "/catalog-dark/2026-salon-koleksiyonu/04.webp",
+      "/catalog-dark/2026-salon-koleksiyonu/05.webp",
+      "/catalog-dark/2026-salon-koleksiyonu/06.webp",
+      "/catalog-dark/2026-salon-koleksiyonu/07.webp",
+      "/catalog-dark/2026-salon-koleksiyonu/08.webp"
+    ],
+    "pdfUrl": null,
+    "topics": ["Salon takımları", "Köşe takımları", "Kumaş kartelası", "Ölçü şemaları"]
+  },
+  {
+    "slug": "yatak-odasi-rehberi",
+    "title": "Yatak Odası Rehberi",
+    "year": 2026,
+    "pageCount": 6,
+    "summary": "Gardırop planlaması, karyola ölçüleri ve Puffy yatak seçim rehberi.",
+    "description": "Odanızın ölçüsüne göre gardırop derinliği, kapak tipi ve karyola yerleşimi nasıl seçilir? Puffy yatak sertlik tablosu da bu dosyada.",
+    "cover": "/catalog-dark/yatak-odasi-rehberi/kapak.webp",
+    "pages": [
+      "/catalog-dark/yatak-odasi-rehberi/01.webp",
+      "/catalog-dark/yatak-odasi-rehberi/02.webp",
+      "/catalog-dark/yatak-odasi-rehberi/03.webp",
+      "/catalog-dark/yatak-odasi-rehberi/04.webp",
+      "/catalog-dark/yatak-odasi-rehberi/05.webp",
+      "/catalog-dark/yatak-odasi-rehberi/06.webp"
+    ],
+    "pdfUrl": null,
+    "topics": ["Gardırop planı", "Karyola ölçüleri", "Puffy sertlik tablosu"]
+  },
+  {
+    "slug": "yemek-odasi-secki",
+    "title": "Yemek Odası Seçkisi",
+    "year": 2026,
+    "pageCount": 6,
+    "summary": "Açılır masa ölçüleri, sandalye kumaşları ve konsol–vitrin eşleşmeleri.",
+    "description": "Kaç kişilik sofra, hangi masa? Açılır masaların kapalı ve açık ölçüleri, sandalye kumaş seçenekleri ve tamamlayıcı parçalar bir arada.",
+    "cover": "/catalog-dark/yemek-odasi-secki/kapak.webp",
+    "pages": [
+      "/catalog-dark/yemek-odasi-secki/01.webp",
+      "/catalog-dark/yemek-odasi-secki/02.webp",
+      "/catalog-dark/yemek-odasi-secki/03.webp",
+      "/catalog-dark/yemek-odasi-secki/04.webp",
+      "/catalog-dark/yemek-odasi-secki/05.webp",
+      "/catalog-dark/yemek-odasi-secki/06.webp"
+    ],
+    "pdfUrl": null,
+    "topics": ["Açılır masa ölçüleri", "Sandalye kumaşları", "Konsol & vitrin"]
+  },
+  {
+    "slug": "kumas-kartelasi",
+    "title": "Kumaş Kartelası",
+    "year": 2026,
+    "pageCount": 4,
+    "summary": "Kadife, bukle, şönil, keten ve leke tutmaz dokumaların renk aileleri.",
+    "description": "Ekranda gördüğünüz renk, mağazadaki dokuyla birebir olmayabilir; bu yüzden kartela kodlarını da ekledik. Mağazada aynı kodla numune isteyebilirsiniz.",
+    "cover": "/catalog-dark/kumas-kartelasi/kapak.webp",
+    "pages": [
+      "/catalog-dark/kumas-kartelasi/01.webp",
+      "/catalog-dark/kumas-kartelasi/02.webp",
+      "/catalog-dark/kumas-kartelasi/03.webp",
+      "/catalog-dark/kumas-kartelasi/04.webp"
+    ],
+    "pdfUrl": null,
+    "topics": ["Kadife", "Bukle", "Şönil", "Leke tutmaz dokuma"]
+  }
+]

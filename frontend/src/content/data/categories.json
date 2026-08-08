@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "salon-takimlari",
+    "name": "Salon Takımları",
+    "short": "Salon",
+    "summary": "Üçlü, ikili ve berjerden oluşan klasik ve modern salon kurgusu. Kumaş, ayak ve dikiş detayı sipariş sırasında seçilir.",
+    "image": "/collections-dark/salon-takimlari.webp"
+  },
+  {
+    "slug": "kose-takimlari",
+    "name": "Köşe Takımları",
+    "short": "Köşe",
+    "summary": "Yaşam alanının ölçüsüne göre sağ, sol ya da modüler kurulan; yataklı ve sandıklı köşe koltuklar.",
+    "image": "/collections-dark/kose-takimlari.webp"
+  },
+  {
+    "slug": "yemek-odasi",
+    "name": "Yemek Odası",
+    "short": "Yemek odası",
+    "summary": "Masa, sandalye, konsol ve vitrinden oluşan tam takımlar; açılır masa seçenekleriyle.",
+    "image": "/collections-dark/yemek-odasi.webp"
+  },
+  {
+    "slug": "yatak-odasi",
+    "name": "Yatak Odası",
+    "short": "Yatak odası",
+    "summary": "Gardırop, karyola, şifonyer ve komodinden oluşan takımlar; sürgülü dolap seçenekleriyle.",
+    "image": "/collections-dark/yatak-odasi.webp"
+  },
+  {
+    "slug": "yatak-baza",
+    "name": "Yatak & Baza",
+    "short": "Yatak",
+    "summary": "Puffy yetkili satış noktası olarak ortopedik ve hibrit yatak, baza ve başlık seçenekleri.",
+    "image": "/collections-dark/yatak-baza.webp"
+  },
+  {
+    "slug": "tekil-parcalar",
+    "name": "Tekil Parçalar",
+    "short": "Tekil parça",
+    "summary": "Berjer, TV ünitesi, konsol, orta sehpa ve zigon gibi mevcut düzeni tamamlayan parçalar.",
+    "image": "/collections-dark/tekil-parcalar.webp"
+  }
+]

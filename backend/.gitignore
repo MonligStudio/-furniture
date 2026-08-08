@@ -1,0 +1,6 @@
+node_modules/
+.env
+
+# Form kayıtları — gerçek kişi verisi içerir, depoya girmez.
+data/escudo.json
+data/*.tmp

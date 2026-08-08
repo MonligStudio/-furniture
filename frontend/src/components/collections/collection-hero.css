@@ -1,0 +1,198 @@
+/* ------------------------------------------------------------------
+   KOLEKSİYON HERO — TAM EKRAN
+
+   Anasayfadaki slider'da tıklanan kare tam ekrana büyüyor ve ORADA
+   KALIYOR: bu bölüm o karenin devamı. Görsel tam ekran, koleksiyon adı
+   ekranın tam ortasında — büyüyen kopyanın (`.ms-flip-cap`) yazısıyla
+   AYNI konumda, aynı boyda, aynı karartmanın üstünde. Bu yüzden geçiş
+   bittiğinde yeni bir yazı belirmiyor, olan yazı yerinde kalıyor.
+
+   Karartma (`.ch-scrim`) ile `.ms-flip-scrim` birebir aynı olmalı;
+   biri değişirse geçişte parlaklık zıplar.
+
+   Koleksiyon bilgileri (özet + künye) görselin ÜSTÜNDE, alt satırda:
+   geçiş bittikten sonra yavaşça soldan ve sağdan giriyor.
+------------------------------------------------------------------ */
+
+.ch {
+  position: relative;
+  height: 100svh;
+  min-height: 34rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ch-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgb(var(--scrim-rgb) / 0.34), rgb(var(--scrim-rgb) / 0.34)),
+    radial-gradient(circle at 50% 50%, rgb(var(--scrim-rgb) / 0.42), transparent 68%),
+    linear-gradient(to top, rgb(var(--scrim-rgb) / 0.66), transparent 46%);
+}
+
+/* Aydınlık tema gerçek gündüz karesini filtresiz gösterir. Metin paleti
+   açık zemine göre koyulaşır; beyaz/kemik görsel perdesi kullanılmaz. */
+:root[data-theme="light"] .ch {
+  --color-media-fg: #171411;
+  --color-media-fg-muted: #5f574f;
+}
+
+/* Aydınlık temada PERDE YOK — fotoğrafa hiçbir açık/koyu tül binmiyor.
+   Okunurluk yazının kendi halesinden geliyor (bkz. `--media-halo`).
+   `.ms-flip-scrim` ile BİREBİR AYNI olmalı. */
+:root[data-theme="light"] .ch-scrim {
+  background: none;
+}
+
+:root[data-theme="light"] .ch-cap,
+:root[data-theme="light"] .ch-foot {
+  text-shadow: var(--media-halo);
+}
+
+/* Perde olmadığı için saydam gri tonlar yetmiyor: etiketler de neredeyse
+   tam mürekkep olsun. */
+:root[data-theme="light"] .ch-meta,
+:root[data-theme="light"] .ch-specs dt {
+  color: color-mix(in oklab, var(--color-media-fg) 88%, transparent);
+}
+
+:root[data-theme="light"] .ch-specs {
+  border-top-color: color-mix(in oklab, var(--color-media-fg) 40%, transparent);
+}
+
+/* ---- Ortadaki başlık: büyüyen karenin yazısının aynısı ---- */
+.ch-cap {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--color-media-fg);
+}
+
+.ch-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 5.6vw, 4rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.ch-meta {
+  font-family: var(--font-label);
+  font-size: 0.66rem;
+  line-height: 1.4;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-media-fg) 78%, transparent);
+}
+
+/* ---- Alt satır: soldan ve sağdan yavaşça giren bilgiler ---- */
+.ch-foot {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 10;
+  padding-bottom: clamp(1.75rem, 5vh, 3.25rem);
+}
+
+.ch-grid {
+  display: grid;
+  gap: 2rem 3rem;
+  align-items: end;
+}
+
+@media (min-width: 60em) {
+  .ch-grid {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+/* Maskenin içindeki blok kendi yüksekliğini kutuya versin. */
+.ch-rise__in {
+  display: flow-root;
+}
+
+/* Künye: Ürün / Üretim / Özel ölçü / Montaj */
+.ch-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2.5rem;
+  border-top: 1px solid color-mix(in oklab, var(--color-media-fg) 24%, transparent);
+  padding-top: 1.25rem;
+}
+
+.ch-specs > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ch-specs dt {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-media-fg) 62%, transparent);
+}
+
+.ch-specs dd {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-media-fg);
+}
+
+/* Geçiş bittikten (~0.85 sn) sonra başlayan yavaş giriş: yazı YERDEN
+   ÇIKIYORMUŞ gibi alttan yükseliyor. Dıştaki kutu `overflow: hidden`,
+   içerik kendi yüksekliği kadar aşağıda başlıyor — yani görünmüyor, sonra
+   maskenin içinden yukarı sürülüyor. */
+.ch-rise {
+  overflow: hidden;
+}
+
+.ch-rise__in {
+  transform: translate3d(0, 105%, 0);
+  will-change: transform;
+  animation: ch-rise 1.45s var(--ease-out-soft) forwards;
+}
+
+.ch-rise--1 .ch-rise__in {
+  animation-delay: 1.1s;
+}
+
+.ch-rise--2 .ch-rise__in {
+  animation-delay: 1.32s;
+}
+
+@keyframes ch-rise {
+  from {
+    transform: translate3d(0, 105%, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ch-rise__in {
+    transform: none;
+    animation: none;
+  }
+}
+
+/* JS'siz/animasyonsuz ortamda da içerik görünür kalsın. */
+@media (scripting: none) {
+  .ch-rise__in {
+    transform: none;
+    animation: none;
+  }
+}

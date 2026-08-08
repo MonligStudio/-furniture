@@ -1,0 +1,286 @@
+/* ------------------------------------------------------------------
+   ÜRÜN DETAY SAHNESİ
+   Kenardan kenara, ekran boyunda tek bir büyük fotoğraf; sağında havada
+   duran bilgi paneli; solda altta ileri/geri düğmeleri ve nokta işaretleri.
+
+   Referans kurgu ROOOF ürün sayfası: dev görsel + üstünde yüzen panel.
+   Palet bu projeye ait — panel beyaz değil mürekkep, köşeler kare.
+------------------------------------------------------------------ */
+
+.pd-stage {
+  position: relative;
+  height: 100svh;
+  min-height: 38rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.pd-media {
+  position: absolute;
+  inset: 0;
+}
+
+.pd-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ------------------------------------------------------------------
+   KARE GEÇİŞİ
+   Aynı anda yalnızca İKİ kare boyanıyor: bir önceki altta durur, yeni
+   kare onun üstüne kenardan içeri doğru açılır (maske) ve hafifçe
+   küçülerek yerine oturur. Yön ileri/geri'ye göre değişiyor.
+
+   Saf CSS animasyonu: `clip-path` iki ucu da dört değerli olduğu için
+   tarayıcı sorunsuz ara değerliyor (GSAP'in string eşleme derdi yok) ve
+   rAF'ın kısıldığı ortamlarda da çalışıyor.
+
+   Animasyon yalnızca `data-dir` varken tanımlı — ilk açılışta (henüz bir
+   önceki kare yokken) hero görseli beklemeden görünsün diye.
+------------------------------------------------------------------ */
+.pd-shot {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+}
+
+/* Bir önceki kare: yeni kare üstüne açılırken altta durur. */
+.pd-shot[data-role="prev"] {
+  z-index: 1;
+  opacity: 1;
+}
+
+.pd-shot[data-role="active"] {
+  z-index: 2;
+  opacity: 1;
+}
+
+.pd-shot[data-role="active"][data-dir="1"] {
+  animation: pd-in-next 0.85s var(--ease-scene) both;
+}
+
+.pd-shot[data-role="active"][data-dir="-1"] {
+  animation: pd-in-prev 0.85s var(--ease-scene) both;
+}
+
+@keyframes pd-in-next {
+  from {
+    clip-path: inset(0% 0% 0% 100%);
+    transform: scale(1.08);
+  }
+  to {
+    clip-path: inset(0% 0% 0% 0%);
+    transform: scale(1);
+  }
+}
+
+@keyframes pd-in-prev {
+  from {
+    clip-path: inset(0% 100% 0% 0%);
+    transform: scale(1.08);
+  }
+  to {
+    clip-path: inset(0% 0% 0% 0%);
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-shot[data-role="active"][data-dir] {
+    animation: none;
+  }
+}
+
+/* Panelin altındaki metin okunur kalsın diye ince karartma. */
+.pd-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgb(var(--scrim-rgb) / 0.45), transparent 45%),
+    linear-gradient(to top, rgb(var(--scrim-rgb) / 0.5), transparent 40%);
+}
+
+/* ---- Geri bağlantısı ---- */
+.pd-back {
+  position: absolute;
+  top: clamp(5.5rem, 11vh, 7.5rem);
+  left: 0;
+  z-index: 3;
+}
+
+/* ---- Sağda havada duran bilgi paneli ---- */
+.pd-panel {
+  position: absolute;
+  top: 50%;
+  right: clamp(1rem, 4vw, 3.5rem);
+  z-index: 3;
+  width: min(30rem, 42vw);
+  max-height: min(78svh, 46rem);
+  translate: 0 -50%;
+  overflow-y: auto;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-ink-950);
+  padding: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+/* Gündüz temasında bilgi paneli de kâğıt paletine döner. Görselin üstüne
+   beyaz bir filtre bindirilmez; yalnızca bağımsız panel yüzeyi açılır. */
+:root[data-theme="light"] .pd-panel {
+  --color-ink-950: #f1ede6;
+  --color-line: #d5cec1;
+  --color-line-strong: #aaa191;
+  --color-fg: #171411;
+  --color-fg-muted: #5f574f;
+  --color-fg-faint: #756b62;
+  --color-accent: #171411;
+  --color-accent-soft: #000000;
+  border-color: rgb(23 20 17 / 0.18);
+  background: rgb(241 237 230 / 0.96);
+  color: #171411;
+  box-shadow: 0 1.5rem 4rem rgb(40 36 30 / 0.18);
+}
+
+/* Aydınlık temada PERDE YOK — kare olduğu gibi duruyor. "Tüm ürünler"
+   bağlantısı yazı halesiyle okunuyor; panelin kendi zemini var. */
+:root[data-theme="light"] .pd-scrim {
+  background: none;
+}
+
+:root[data-theme="light"] .pd-back,
+:root[data-theme="light"] .pd-nav {
+  text-shadow: var(--media-halo);
+}
+
+/* ---- Sol altta gezinme ---- */
+.pd-nav {
+  position: absolute;
+  bottom: clamp(1.25rem, 4vh, 2.5rem);
+  left: clamp(1rem, 4vw, 3.5rem);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* `> button` ŞART: küçük kareler de bu kabın içinde birer button ve
+   düz `.pd-nav button` seçicisi onları da yakalayıp 3rem'lik ok
+   düğmesine çeviriyordu. */
+.pd-nav > button {
+  display: inline-flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in oklab, var(--color-media-fg) 45%, transparent);
+  border-radius: var(--radius-card);
+  background: rgb(var(--scrim-rgb) / 0.35);
+  backdrop-filter: blur(8px);
+  color: var(--color-media-fg);
+  transition:
+    background-color 0.3s var(--ease-out-soft),
+    border-color 0.3s var(--ease-out-soft);
+}
+
+.pd-nav > button:hover {
+  border-color: var(--color-media-fg);
+  background: rgb(var(--scrim-rgb) / 0.6);
+}
+
+/* ---- Küçük kareler (thumbnail) ---- */
+.pd-thumbs {
+  display: flex;
+  gap: 0.5rem;
+  max-width: min(26rem, 42vw);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pd-thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.pd-thumb {
+  position: relative;
+  width: 4.25rem;
+  height: 3rem;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--color-media-fg) 35%, transparent);
+  border-radius: var(--radius-card);
+  padding: 0;
+  opacity: 0.55;
+  transition:
+    opacity 0.3s var(--ease-out-soft),
+    border-color 0.3s var(--ease-out-soft);
+}
+
+.pd-thumb:hover {
+  opacity: 0.85;
+}
+
+.pd-thumb[data-active="true"] {
+  border-color: var(--color-media-fg);
+  opacity: 1;
+}
+
+.pd-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Dar ekran: panel görselin altına iner ---- */
+@media (max-width: 63.99em) {
+  .pd-stage {
+    height: auto;
+    min-height: 0;
+  }
+
+  .pd-media {
+    position: relative;
+    inset: auto;
+    height: 68svh;
+    min-height: 22rem;
+  }
+
+  .pd-panel {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: auto;
+    max-height: none;
+    translate: none;
+    border-inline: 0;
+    border-radius: 0;
+    overflow-y: visible;
+  }
+
+  .pd-nav {
+    bottom: auto;
+    top: calc(68svh - 4.5rem);
+    right: clamp(1rem, 4vw, 3.5rem);
+    gap: 0.75rem;
+  }
+
+  .pd-thumbs {
+    max-width: none;
+  }
+
+  .pd-thumb {
+    width: 3.25rem;
+    height: 2.5rem;
+  }
+
+  /* `left` verilmiyor: kutu zaten `shell` sınıfını taşıyor ve kenar
+     boşluğunu o veriyor — ikisi üst üste binince kutu sağdan taşıyordu. */
+  .pd-back {
+    top: clamp(5rem, 10vh, 6.5rem);
+  }
+}

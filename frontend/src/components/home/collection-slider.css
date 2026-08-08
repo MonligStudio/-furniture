@@ -1,0 +1,307 @@
+/* ------------------------------------------------------------------
+   MODÜLER SLIDER (koleksiyonlar)
+   Kaynak etkileşim: "modular-slider" demosu — bu projeye React ve tema
+   token'larıyla uyarlandı.
+
+   Kurgu: ortada iki parçaya bölünmüş bir görsel kutusu, arkasında yatay
+   kayan başlık şeridi. Slayt değişince yeni görsel sağdan sola açılan bir
+   maskeyle giriyor; üst ve alt yarı arasında küçük bir gecikme var.
+   Üstüne gelindiğinde iki yarı birbirine hizalanır.
+------------------------------------------------------------------ */
+
+.ms {
+  position: relative;
+  height: clamp(26rem, 62vh, 34rem);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ---- Yatay kayan başlık şeridi ---- */
+.ms-titles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  /* Genişlik = başlık sayısı × (kabın üçte biri) → aynı anda 3 başlık. */
+  width: calc(var(--ms-count) * (100% / 3));
+}
+
+.ms-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 1rem;
+  background: none;
+  border: 0;
+  color: inherit;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.ms-title span {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.9vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-fg);
+  opacity: 0.22;
+  transition:
+    opacity 0.35s var(--ease-out-soft),
+    color 0.35s var(--ease-out-soft);
+}
+
+.ms-title[data-active="true"] span {
+  opacity: 1;
+}
+
+.ms-title:hover span {
+  opacity: 0.6;
+}
+
+.ms-title[data-active="true"]:hover span {
+  opacity: 1;
+}
+
+/* ---- Ortadaki görsel kutusu ---- */
+.ms-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: min(34rem, 74%);
+  height: min(28rem, 76%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.ms-half {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transition: clip-path 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+/* İki yarı, birbirinden kaydırılmış iki bant olarak duruyor. */
+.ms-half.--top {
+  clip-path: polygon(85% 0%, 0% 0%, 0% 50%, 85% 50%);
+}
+
+.ms-half.--bottom {
+  clip-path: polygon(100% 50%, 15% 50%, 15% 100%, 100% 100%);
+}
+
+.ms-stage:hover .ms-half.--top,
+.ms-stage:focus-visible .ms-half.--top {
+  clip-path: polygon(90% 0%, 10% 0%, 10% 50%, 90% 50%);
+}
+
+.ms-stage:hover .ms-half.--bottom,
+.ms-stage:focus-visible .ms-half.--bottom {
+  clip-path: polygon(90% 50%, 10% 50%, 10% 100%, 90% 100%);
+}
+
+.ms-half img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* "Buraya girilir" işareti — karenin tıklanabilir olduğu belli olsun.
+   Karenin ORTASI değil ALTI: ortada, şeridin etkin başlığı duruyor;
+   ikisi üst üste biniyordu. */
+.ms-cue {
+  position: absolute;
+  bottom: clamp(0.9rem, 3%, 1.5rem);
+  left: 50%;
+  z-index: 3;
+  border: 1px solid color-mix(in oklab, var(--color-media-fg) 55%, transparent);
+  background: rgb(var(--scrim-rgb) / 0.55);
+  backdrop-filter: blur(8px);
+  padding: 0.7rem 1.1rem;
+  font-family: var(--font-label);
+  font-size: 0.56rem;
+  line-height: 1;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-media-fg);
+  opacity: 0;
+  translate: -50% 0.5rem;
+  pointer-events: none;
+  transition:
+    opacity 0.32s var(--ease-out-soft),
+    translate 0.32s var(--ease-out-soft);
+}
+
+.ms-stage:hover .ms-cue,
+.ms-stage:focus-visible .ms-cue {
+  opacity: 1;
+  translate: -50% 0;
+}
+
+/* Dokunmatikte hover yok: işaret sürekli görünür. */
+@media (hover: none) {
+  .ms-cue {
+    opacity: 1;
+    translate: -50% 0;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Sayfaya geçiş kopyası.
+   Tıklanan kare, gövdeye eklenen bu sabit katmanla dört yana doğru
+   büyüyüp ekranı kaplar (bkz. collection-slider.tsx → `enter`). Gövdeye
+   ekleniyor çünkü slider'ın üstündeki katmanlarda `overflow: hidden` ve
+   `will-change: transform` var; `position: fixed` bir çocuk orada
+   kırpılırdı. Maske animasyonu yok — sadece büyüme.
+------------------------------------------------------------------ */
+.ms-flip {
+  position: fixed;
+  z-index: 80;
+  overflow: hidden;
+  background: var(--color-ink-950);
+  pointer-events: none;
+  /* Yazı kopyanın genişliğine göre ölçekleniyor (bkz. .ms-flip-title):
+     kare büyüdükçe başlık da büyüyor, küçük karede taşmıyor. */
+  container-type: inline-size;
+}
+
+.ms-flip img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Büyürken yazının okunması için görselin üstünde ince karartma.
+   Hedef sayfanın hero'sundaki `.ch-scrim` ile BİREBİR AYNI olmalı —
+   biri değişirse geçişte parlaklık zıplar. */
+.ms-flip-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgb(var(--scrim-rgb) / 0.34), rgb(var(--scrim-rgb) / 0.34)),
+    radial-gradient(circle at 50% 50%, rgb(var(--scrim-rgb) / 0.42), transparent 68%),
+    linear-gradient(to top, rgb(var(--scrim-rgb) / 0.66), transparent 46%);
+}
+
+/* `.ch-scrim`ın aydınlık sürümüyle BİREBİR AYNI — biri değişirse geçişte
+   parlaklık zıplar. Aydınlık temada perde yok. */
+:root[data-theme="light"] .ms-flip-scrim {
+  background: none;
+}
+
+/* Koleksiyon adı + ürün sayısı: kopya büyürken tam ortada kalır. */
+.ms-flip-cap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--color-media-fg);
+}
+
+:root[data-theme="light"] .ms-flip-cap {
+  color: #171411;
+  text-shadow: var(--media-halo);
+}
+
+.ms-flip-title {
+  font-family: var(--font-display);
+  /* `cqw` = kopyanın kendi genişliği: şeritteki başlık boyunda başlayıp
+     tam ekranda hero boyuna çıkıyor. */
+  font-size: clamp(1.1rem, 5.6cqw, 4rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.ms-flip-meta {
+  font-family: var(--font-label);
+  font-size: 0.66rem;
+  line-height: 1.4;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-media-fg) 78%, transparent);
+}
+
+/* ---- Alt satır: sayaç, bağlantı, ileri/geri ---- */
+.ms-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  border-top: 1px solid var(--color-line);
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+}
+
+.ms-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ms-nav button {
+  display: inline-flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-line);
+  color: var(--color-fg-muted);
+  transition:
+    border-color 0.3s var(--ease-out-soft),
+    color 0.3s var(--ease-out-soft);
+}
+
+.ms-nav button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+@media (max-width: 47.99em) {
+  .ms {
+    height: clamp(22rem, 56vh, 27rem);
+  }
+
+  .ms-stage {
+    width: 88%;
+    height: 82%;
+  }
+
+  /* Dar ekranda iki yarı tek kare gibi durur. */
+  .ms-half.--top,
+  .ms-stage:hover .ms-half.--top {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  }
+
+  .ms-half.--bottom,
+  .ms-stage:hover .ms-half.--bottom {
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+  }
+
+  .ms-title span {
+    opacity: 0;
+  }
+
+  .ms-title[data-active="true"] span {
+    opacity: 1;
+  }
+}

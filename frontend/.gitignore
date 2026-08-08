@@ -1,0 +1,14 @@
+node_modules/
+.next/
+out/
+.env*.local
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Yer tutucu medya ffmpeg ile üretiliyor (scripts/generate-placeholders.mjs).
+# Gerçek fotoğraflar geldiğinde bu satırlar kaldırılıp dosyalar depoya alınır.
+public/products/
+public/collections/
+public/catalog/
+public/showroom/
+public/video/

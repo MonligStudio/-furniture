@@ -1,0 +1,212 @@
+/* ------------------------------------------------------------------
+   SÜREÇ — sabitlenmiş görsel + maske ile açılma
+   Kaynak etkileşim: "gsap-pinned-image-mask-reveal-on-scroll" demosu;
+   bu projeye tema token'larıyla uyarlandı.
+
+   Kurgu: solda her biri bir ekran boyunda adım metinleri, sağda üst üste
+   yığılmış görseller. Sağ sütun scroll boyunca sabitlenir (pin); adım
+   değiştikçe üstteki görsel alttan yukarı doğru MASKELENİP siliniyor ve
+   altındaki ortaya çıkıyor. Görseller aynı anda `object-position` ile
+   hafifçe kayıyor — bu, maskeye derinlik veriyor.
+
+   Adım kutularının 100svh olması ŞART: sabitleme süresi (toplam boy −
+   1 ekran) adım sayısı − 1'e bölündüğünde her geçiş tam bir ekrana denk
+   gelsin diye. Kutular kısalırsa metinle görsel geçişi kayar.
+------------------------------------------------------------------ */
+
+.prc-arch {
+  display: flex;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+/* ---- Sol sütun: adımlar ---- */
+.prc-left {
+  display: flex;
+  min-width: 0;
+  /* İki sütun da esnek: dar masaüstünde ikisi birden daralıyor. */
+  flex: 1 1 18rem;
+  flex-direction: column;
+}
+
+.prc-info {
+  display: grid;
+  height: 100svh;
+  max-width: 32rem;
+  align-content: center;
+}
+
+/* Sabitleme aralığını uzatan kuyruk — bkz. process.tsx `TAIL_SCREENS`. */
+.prc-tail {
+  height: 60svh;
+  flex: 0 0 auto;
+}
+
+.prc-step {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  font-family: var(--font-label);
+  font-size: 0.66rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-fg-faint);
+}
+
+.prc-step b {
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--color-accent);
+}
+
+.prc-title {
+  margin-top: 1.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+}
+
+.prc-body {
+  margin-top: 1rem;
+  max-width: 26rem;
+  color: var(--color-fg-muted);
+}
+
+/* ---- Sağ sütun: sabitlenen görsel yığını ---- */
+.prc-right {
+  /* SABİTLEME CSS `sticky` İLE — ScrollTrigger'ın `pin`'i değil.
+     `pin` bu sütunu bir `.pin-spacer` içine sarıyor ve spacer kendi flex
+     ölçüsünü alıyordu (ölçtüğümde 705px, sütunun kendisi 506px): aradaki
+     fark sol sütunu 254px'e eziyordu. `sticky` flex düzenine hiç
+     dokunmuyor; ScrollTrigger'a yalnızca scrub kalıyor. */
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  /* `stretch` olursa yapışacak boşluk kalmaz. */
+  align-self: flex-start;
+  min-width: 0;
+  flex: 1 1 24rem;
+  /* `46vw` sınırı: dar masaüstünde görsel sütunu büyümesin, metin
+     sütununa yer kalsın (yoksa 34rem'e dayanıp soldan çalıyor). */
+  max-width: min(34rem, 46vw);
+}
+
+.prc-img {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: min(26rem, 58svh);
+  translate: 0 -50%;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-ink-900);
+  /* Her kare KENDİ görünürlüğünü sürüyor: %100 = tamamen gizli,
+     %0 = tam açık. Üstteki inset küçüldükçe kare ALTTAN YUKARI doğru
+     açılıyor.
+
+     Neden "giden kareyi sil" değil de "gelen kareyi aç": silme kurgusunda
+     bir karenin doğru görünmesi ALTINDAKİ karenin de doğru durumda
+     olmasına bağlıydı; sıra bir yerde kayınca çizgi görünüyor ama altından
+     aynı fotoğraf çıkıyordu. Burada her karenin tek bir tween'i var ve
+     hangi noktada olursa olsun en üstteki açık kare o adımın fotoğrafı.
+
+     Tek SAYI sürülüyor (`--prc-reveal`), `clip-path` string'i değil:
+     tarayıcı `inset(0% 0% 0% 0%)`'ı `inset(0%)`'e indirgediği için GSAP
+     iki ucun sayı adedini eşleyemiyor ve ara değer üretemiyordu. */
+  clip-path: inset(var(--prc-reveal, 0%) 0% 0% 0%);
+}
+
+/* Kadraj kaymasını GSAP transform ile veriyor (bkz. process.tsx): görsel
+   bu yüzden %112 ölçekli duruyor, üstte ve altta %6 pay bırakıyor. */
+.prc-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+  scale: 1.12;
+}
+
+/* ---- Dar/orta ekran: sabitleme yok, adım ve görsel sırayla ----
+   Sabitlenen iki sütunlu kurgu 64em altında sığmıyor; tabletler de bu
+   dala düşüyor (process.tsx'teki matchMedia ile aynı eşik). */
+@media (max-width: 63.99em) {
+  .prc-arch {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Demodaki numara: iki sütun da "yok olup" çocuklarını tek akışa
+     bırakıyor, sıralama `order` ile metin→görsel diye geçiştiriliyor.
+
+     Sıralama JS'te DEĞİL burada: JS ile yapıldığında sıra yalnızca
+     matchMedia dalı çalıştığında kuruluyordu, pencere yeniden
+     boyutlandırılınca eski hâlinde kalabiliyordu. */
+  .prc-left,
+  .prc-right {
+    display: contents;
+  }
+
+  .prc-info:nth-child(1) {
+    order: 0;
+  }
+  .prc-img:nth-child(1) {
+    order: 1;
+  }
+  .prc-info:nth-child(2) {
+    order: 2;
+  }
+  .prc-img:nth-child(2) {
+    order: 3;
+  }
+  .prc-info:nth-child(3) {
+    order: 4;
+  }
+  .prc-img:nth-child(3) {
+    order: 5;
+  }
+  .prc-info:nth-child(4) {
+    order: 6;
+  }
+  .prc-img:nth-child(4) {
+    order: 7;
+  }
+  .prc-info:nth-child(5) {
+    order: 8;
+  }
+  .prc-img:nth-child(5) {
+    order: 9;
+  }
+
+  .prc-info {
+    height: auto;
+    max-width: none;
+    padding-block: 1.75rem 2.5rem;
+  }
+
+  /* Kuyruk yalnızca sabitleme varken anlamlı. */
+  .prc-tail {
+    display: none;
+  }
+
+  .prc-right {
+    position: static;
+    height: auto;
+    max-width: none;
+  }
+
+  .prc-img {
+    position: static;
+    height: clamp(13rem, 42vw, 22rem);
+    translate: none;
+    /* Sabitleme çalışmadığı için maske de yok — hepsi görünür. */
+    clip-path: none !important;
+    z-index: auto !important;
+  }
+}

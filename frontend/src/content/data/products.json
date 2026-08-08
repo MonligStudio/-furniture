@@ -1,0 +1,640 @@
+[
+  {
+    "slug": "latte-salon-takimi",
+    "name": "Latte Salon Takımı",
+    "category": "salon-takimlari",
+    "badge": "Çok satan",
+    "featured": true,
+    "tagline": "Yuvarlak hatlar, sıcak tonlar, sakin bir salon.",
+    "description": "Latte, yuvarlatılmış kol hatları ve derin oturumuyla günün büyük bölümünü salonda geçiren aileler için tasarlandı. Sırt minderleri elyaf destekli, oturum minderleri yüksek yoğunluklu süngerdir; iskelet birinci sınıf kurutulmuş kayın ağacından üretilir.",
+    "highlights": [
+      "Üçlü + ikili + tekli standart kurgu",
+      "Yataklı ve sandıklı üçlü seçeneği",
+      "38 kumaş, 6 ayak varyantı",
+      "Sökülebilir minder kılıfı"
+    ],
+    "specs": {
+      "Üçlü koltuk": "220 × 95 × 85 cm",
+      "İkili koltuk": "170 × 95 × 85 cm",
+      "Tekli koltuk": "105 × 95 × 85 cm",
+      "Oturum yüksekliği": "45 cm",
+      "İskelet": "Kurutulmuş kayın + kontrplak",
+      "Sünger": "32 dns yüksek yoğunluklu"
+    },
+    "materials": [
+      "Kadife",
+      "Keten görünümlü dokuma",
+      "Nubuk süet"
+    ],
+    "colors": [
+      "Latte",
+      "Antrasit",
+      "Kum",
+      "Yeşil çay"
+    ],
+    "image": "/products-dark/latte-salon-takimi.webp",
+    "gallery": [
+      "/products-dark/latte-salon-takimi.webp",
+      "/products-dark/latte-salon-takimi-2.webp",
+      "/products-dark/latte-salon-takimi-3.webp"
+    ]
+  },
+  {
+    "slug": "alfa-salon-takimi",
+    "name": "Alfa Salon Takımı",
+    "category": "salon-takimlari",
+    "featured": true,
+    "tagline": "Düz çizgiler, ince kol, geniş oturum.",
+    "description": "Alfa; ince kol yapısı ve alçak sırt çizgisiyle salonu olduğundan geniş gösteren modern bir takım. Metal ayak detayı ve çift dikişli kenar, sade bir gövdeye zanaat hissi katar.",
+    "highlights": [
+      "İnce kol, geniş oturum",
+      "Krom veya siyah metal ayak",
+      "Çift dikişli kenar detayı",
+      "İsteğe bağlı puf"
+    ],
+    "specs": {
+      "Üçlü koltuk": "230 × 92 × 80 cm",
+      "İkili koltuk": "175 × 92 × 80 cm",
+      "Berjer": "95 × 92 × 80 cm",
+      "Oturum yüksekliği": "44 cm",
+      "İskelet": "Kurutulmuş kayın + çelik takviye",
+      "Sünger": "30 dns + elyaf sırt"
+    },
+    "materials": [
+      "Şönil",
+      "Keten görünümlü dokuma",
+      "Deri görünümlü kumaş"
+    ],
+    "colors": [
+      "Antrasit",
+      "Taş grisi",
+      "Bej",
+      "Petrol mavisi"
+    ],
+    "image": "/products-dark/alfa-salon-takimi.webp",
+    "gallery": [
+      "/products-dark/alfa-salon-takimi.webp",
+      "/products-dark/alfa-salon-takimi-2.webp",
+      "/products-dark/alfa-salon-takimi-3.webp"
+    ]
+  },
+  {
+    "slug": "gold-koltuk-takimi",
+    "name": "Gold Koltuk Takımı",
+    "category": "salon-takimlari",
+    "tagline": "Kapitone sırt, pirinç detay, davetkâr bir oda.",
+    "description": "Misafir odasını ağırbaşlı bir çizgide kuranlar için: kapitone sırt, ince pirinç fitil ve oyulmuş ahşap ayak. Klasik bir siluetin gereksiz süsten arındırılmış hâli.",
+    "highlights": [
+      "Elde çekilmiş kapitone sırt",
+      "Pirinç fitil detayı",
+      "Oyma ahşap ayak",
+      "Takım içinde iki berjer"
+    ],
+    "specs": {
+      "Üçlü koltuk": "215 × 100 × 98 cm",
+      "İkili koltuk": "165 × 100 × 98 cm",
+      "Berjer": "88 × 100 × 98 cm",
+      "Oturum yüksekliği": "47 cm",
+      "İskelet": "Kurutulmuş kayın",
+      "Sünger": "32 dns + silikon elyaf"
+    },
+    "materials": [
+      "Kadife",
+      "Jakar dokuma"
+    ],
+    "colors": [
+      "Bordo",
+      "Şampanya",
+      "Gece mavisi",
+      "Antrasit"
+    ],
+    "image": "/products-dark/gold-koltuk-takimi.webp",
+    "gallery": [
+      "/products-dark/gold-koltuk-takimi.webp",
+      "/products-dark/gold-koltuk-takimi-2.webp"
+    ]
+  },
+  {
+    "slug": "titanyum-koltuk-takimi",
+    "name": "Titanyum Koltuk Takımı",
+    "category": "salon-takimlari",
+    "featured": true,
+    "tagline": "Sert gövde, yumuşak oturum, uzun ömür.",
+    "description": "Titanyum, yoğun kullanılan salonlar için kurgulandı. Çelik takviyeli iskeleti ve yüksek yoğunluklu süngeriyle yıllar içinde çökmeye direnç gösterir; kılıfları tamamen sökülüp yıkanabilir.",
+    "highlights": [
+      "Çelik takviyeli iskelet",
+      "Sökülüp yıkanabilir kılıf",
+      "Yataklı üçlü seçeneği",
+      "Leke tutmayan kumaş opsiyonu"
+    ],
+    "specs": {
+      "Üçlü koltuk": "225 × 96 × 88 cm",
+      "İkili koltuk": "172 × 96 × 88 cm",
+      "Tekli koltuk": "100 × 96 × 88 cm",
+      "Oturum yüksekliği": "46 cm",
+      "İskelet": "Kurutulmuş kayın + çelik",
+      "Sünger": "35 dns"
+    },
+    "materials": [
+      "Leke tutmaz dokuma",
+      "Şönil"
+    ],
+    "colors": [
+      "Titan gri",
+      "Antrasit",
+      "Kum",
+      "Vizon"
+    ],
+    "image": "/products-dark/titanyum-koltuk-takimi.webp",
+    "gallery": [
+      "/products-dark/titanyum-koltuk-takimi.webp",
+      "/products-dark/titanyum-koltuk-takimi-2.webp"
+    ]
+  },
+  {
+    "slug": "rosa-avangarde-takim",
+    "name": "Rosa Avangarde Takım",
+    "category": "salon-takimlari",
+    "tagline": "Salonun ortasında duran heykel gibi bir takım.",
+    "description": "Rosa; kavisli sırtı, tek parça görünen gövdesi ve gizli ayaklarıyla salonu tek başına kuran bir parça. Geniş salonlarda orta alana yerleştirilmek üzere tasarlandı.",
+    "highlights": [
+      "Kavisli tek parça sırt",
+      "Gizli ayak, yere oturan gövde",
+      "Özel ölçü üretim",
+      "Eşleşen puf ve yastıklar"
+    ],
+    "specs": {
+      "Üçlü koltuk": "240 × 98 × 76 cm",
+      "İkili koltuk": "180 × 98 × 76 cm",
+      "Oturum yüksekliği": "42 cm",
+      "İskelet": "Kurutulmuş kayın + kontrplak",
+      "Sünger": "30 dns + kaz tüyü hissi elyaf"
+    },
+    "materials": [
+      "Bukle",
+      "Kadife"
+    ],
+    "colors": [
+      "Kırık beyaz",
+      "Toz pembe",
+      "Kum",
+      "Kahve"
+    ],
+    "image": "/products-dark/rosa-avangarde-takim.webp",
+    "gallery": [
+      "/products-dark/rosa-avangarde-takim.webp"
+    ]
+  },
+  {
+    "slug": "gunes-kose-takimi",
+    "name": "Güneş Köşe Takımı",
+    "category": "kose-takimlari",
+    "badge": "Özel ölçü",
+    "featured": true,
+    "tagline": "Odanın ölçüsüne göre kurulan köşe.",
+    "description": "Güneş, sağ ya da sol köşe olarak, istenirse şezlong modülüyle birlikte üretilir. Sandıklı tabanı mevsimlik eşyalar için geniş bir hacim bırakır; açıldığında iki kişilik yatak olur.",
+    "highlights": [
+      "Sağ / sol köşe seçeneği",
+      "Sandıklı taban",
+      "Açılır yatak mekanizması",
+      "Özel ölçü üretim"
+    ],
+    "specs": {
+      "Köşe (standart)": "290 × 200 × 88 cm",
+      "Yatak ölçüsü": "190 × 130 cm",
+      "Oturum derinliği": "58 cm",
+      "Oturum yüksekliği": "45 cm",
+      "İskelet": "Kurutulmuş kayın + çelik",
+      "Sünger": "32 dns"
+    },
+    "materials": [
+      "Şönil",
+      "Leke tutmaz dokuma",
+      "Kadife"
+    ],
+    "colors": [
+      "Vizon",
+      "Antrasit",
+      "Krem",
+      "Haki"
+    ],
+    "image": "/products-dark/gunes-kose-takimi.webp",
+    "gallery": [
+      "/products-dark/gunes-kose-takimi.webp",
+      "/products-dark/gunes-kose-takimi-2.webp",
+      "/products-dark/gunes-kose-takimi-3.webp"
+    ]
+  },
+  {
+    "slug": "nova-kose-koltuk",
+    "name": "Nova Köşe Koltuk",
+    "category": "kose-takimlari",
+    "tagline": "Küçük salonlar için derli toplu bir köşe.",
+    "description": "Nova, dar salonlarda köşeyi doldurmadan oturma alanı kazandırır. Alçak sırtı odayı basmaz, ince ayakları zemini görünür bırakır.",
+    "highlights": [
+      "Kompakt ölçü",
+      "Alçak sırt, ince ayak",
+      "Sandıklı taban",
+      "Eşleşen puf"
+    ],
+    "specs": {
+      "Köşe": "250 × 165 × 82 cm",
+      "Oturum derinliği": "55 cm",
+      "Oturum yüksekliği": "44 cm",
+      "İskelet": "Kurutulmuş kayın",
+      "Sünger": "30 dns"
+    },
+    "materials": [
+      "Keten görünümlü dokuma",
+      "Şönil"
+    ],
+    "colors": [
+      "Gri",
+      "Bej",
+      "Yeşil çay"
+    ],
+    "image": "/products-dark/nova-kose-koltuk.webp",
+    "gallery": [
+      "/products-dark/nova-kose-koltuk.webp",
+      "/products-dark/nova-kose-koltuk-2.webp"
+    ]
+  },
+  {
+    "slug": "loft-moduler-kose",
+    "name": "Loft Modüler Köşe",
+    "category": "kose-takimlari",
+    "tagline": "Modülleri istediğin gibi diz, yıllar sonra yeniden diz.",
+    "description": "Loft; köşe, orta, şezlong ve puf modüllerinden oluşur. Taşındığınızda yeni odanın planına göre yeniden kurulur, ihtiyaç halinde modül eklenir.",
+    "highlights": [
+      "5 farklı modül",
+      "Sonradan modül ekleme",
+      "Gizli bağlantı aparatı",
+      "Geniş oturum derinliği"
+    ],
+    "specs": {
+      "Modül genişliği": "90 cm",
+      "Köşe modülü": "110 × 110 cm",
+      "Şezlong": "90 × 165 cm",
+      "Oturum derinliği": "62 cm",
+      "İskelet": "Kurutulmuş kayın + çelik",
+      "Sünger": "32 dns + elyaf"
+    },
+    "materials": [
+      "Bukle",
+      "Leke tutmaz dokuma"
+    ],
+    "colors": [
+      "Kum",
+      "Antrasit",
+      "Kırık beyaz"
+    ],
+    "image": "/products-dark/loft-moduler-kose.webp",
+    "gallery": [
+      "/products-dark/loft-moduler-kose.webp"
+    ]
+  },
+  {
+    "slug": "malta-yemek-odasi",
+    "name": "Malta Yemek Odası Takımı",
+    "category": "yemek-odasi",
+    "featured": true,
+    "tagline": "Açılır masa, altı sandalye, vitrin ve konsol.",
+    "description": "Malta; kalın tabla kenarı ve tornalı ayaklarıyla klasik bir yemek odası kurgusu. Masa 180 cm'den 230 cm'ye açılır, kalabalık günlerde sofrayı büyütür.",
+    "highlights": [
+      "180 → 230 cm açılır masa",
+      "6 sandalye dahil",
+      "Vitrin + konsol",
+      "Çizilmeye dayanıklı lake yüzey"
+    ],
+    "specs": {
+      "Masa (kapalı)": "180 × 90 × 78 cm",
+      "Masa (açık)": "230 × 90 × 78 cm",
+      "Sandalye": "48 × 55 × 100 cm",
+      "Konsol": "160 × 45 × 80 cm",
+      "Vitrin": "120 × 45 × 200 cm",
+      "Malzeme": "MDF lake + masif ayak"
+    },
+    "materials": [
+      "MDF lake",
+      "Masif kayın ayak",
+      "Temperli cam"
+    ],
+    "colors": [
+      "Ceviz",
+      "Beyaz lake",
+      "Antrasit"
+    ],
+    "image": "/products-dark/malta-yemek-odasi.webp",
+    "gallery": [
+      "/products-dark/malta-yemek-odasi.webp",
+      "/products-dark/malta-yemek-odasi-2.webp",
+      "/products-dark/malta-yemek-odasi-3.webp"
+    ]
+  },
+  {
+    "slug": "vals-yemek-odasi",
+    "name": "Vals Yemek Odası Takımı",
+    "category": "yemek-odasi",
+    "tagline": "Sade tabla, kumaş sandalye, günlük kullanım.",
+    "description": "Vals, her gün kullanılan yemek odaları için tasarlandı. Kumaş kaplı sandalyeleri leke tutmaz kaplamaya sahiptir, masa tablası ısıya ve nemli beze dayanıklıdır.",
+    "highlights": [
+      "Leke tutmaz sandalye kumaşı",
+      "Isıya dayanıklı tabla",
+      "160 → 200 cm açılır masa",
+      "Konsol dahil"
+    ],
+    "specs": {
+      "Masa (kapalı)": "160 × 90 × 76 cm",
+      "Masa (açık)": "200 × 90 × 76 cm",
+      "Sandalye": "45 × 52 × 96 cm",
+      "Konsol": "140 × 40 × 78 cm",
+      "Malzeme": "MDF + masif ayak"
+    },
+    "materials": [
+      "MDF",
+      "Masif kayın ayak",
+      "Leke tutmaz kumaş"
+    ],
+    "colors": [
+      "Meşe",
+      "Kum",
+      "Antrasit"
+    ],
+    "image": "/products-dark/vals-yemek-odasi.webp",
+    "gallery": [
+      "/products-dark/vals-yemek-odasi.webp",
+      "/products-dark/vals-yemek-odasi-2.webp"
+    ]
+  },
+  {
+    "slug": "ancona-masa-sandalye",
+    "name": "Ancona Masa & Sandalye Seti",
+    "category": "yemek-odasi",
+    "tagline": "Mutfak için dört kişilik derli toplu set.",
+    "description": "Mutfağa ya da küçük yemek alanına giren, dört sandalyeli kompakt set. Metal ayak yapısı sağlamdır, tabla mutfak tezgâhı yüksekliğiyle uyumludur.",
+    "highlights": [
+      "4 sandalye dahil",
+      "Metal ayak yapısı",
+      "Kompakt ölçü",
+      "Kolay temizlenen yüzey"
+    ],
+    "specs": {
+      "Masa": "130 × 80 × 75 cm",
+      "Sandalye": "44 × 50 × 88 cm",
+      "Malzeme": "MDF tabla + metal ayak"
+    },
+    "materials": [
+      "MDF",
+      "Toz boya metal",
+      "Suni deri"
+    ],
+    "colors": [
+      "Beyaz",
+      "Meşe",
+      "Siyah"
+    ],
+    "image": "/products-dark/ancona-masa-sandalye.webp",
+    "gallery": [
+      "/products-dark/ancona-masa-sandalye.webp"
+    ]
+  },
+  {
+    "slug": "bella-yatak-odasi",
+    "name": "Bella Yatak Odası Takımı",
+    "category": "yatak-odasi",
+    "featured": true,
+    "tagline": "Sürgülü gardırop, başlıklı karyola, iki komodin.",
+    "description": "Bella; sürgülü kapaklı geniş gardırobu, kumaş başlıklı karyolası, şifonyer ve komodinleriyle tam takım gelir. Gardırop içi raf ve askı düzeni siparişte planlanır.",
+    "highlights": [
+      "240 cm sürgülü gardırop",
+      "Kumaş başlıklı karyola",
+      "Aynalı şifonyer",
+      "Yavaş kapanan menteşe"
+    ],
+    "specs": {
+      "Gardırop": "240 × 60 × 210 cm",
+      "Karyola": "168 × 210 × 110 cm",
+      "Yatak ölçüsü": "160 × 200 cm",
+      "Şifonyer": "110 × 45 × 85 cm",
+      "Komodin": "50 × 40 × 55 cm",
+      "Malzeme": "MDF lake + kumaş başlık"
+    },
+    "materials": [
+      "MDF lake",
+      "Kumaş başlık",
+      "Ayna"
+    ],
+    "colors": [
+      "Kırık beyaz",
+      "Ceviz",
+      "Antrasit"
+    ],
+    "image": "/products-dark/bella-yatak-odasi.webp",
+    "gallery": [
+      "/products-dark/bella-yatak-odasi.webp",
+      "/products-dark/bella-yatak-odasi-2.webp",
+      "/products-dark/bella-yatak-odasi-3.webp"
+    ]
+  },
+  {
+    "slug": "aden-yatak-odasi",
+    "name": "Aden Yatak Odası Takımı",
+    "category": "yatak-odasi",
+    "tagline": "Sıcak ahşap tonu, sakin bir oda.",
+    "description": "Aden, doğal ahşap dokusu ve yumuşak kenar detaylarıyla dinlendirici bir oda kurar. Bazalı karyolası mevsimlik eşyalar için geniş bir hacim bırakır.",
+    "highlights": [
+      "Bazalı karyola",
+      "Doğal ahşap doku",
+      "200 cm gardırop",
+      "Geniş çekmeceli şifonyer"
+    ],
+    "specs": {
+      "Gardırop": "200 × 58 × 205 cm",
+      "Karyola": "168 × 208 × 105 cm",
+      "Yatak ölçüsü": "160 × 200 cm",
+      "Şifonyer": "100 × 45 × 82 cm",
+      "Komodin": "48 × 38 × 52 cm",
+      "Malzeme": "Ahşap desenli MDF"
+    },
+    "materials": [
+      "Ahşap desenli MDF",
+      "Masif kenar"
+    ],
+    "colors": [
+      "Meşe",
+      "Ceviz",
+      "Kum"
+    ],
+    "image": "/products-dark/aden-yatak-odasi.webp",
+    "gallery": [
+      "/products-dark/aden-yatak-odasi.webp",
+      "/products-dark/aden-yatak-odasi-2.webp"
+    ]
+  },
+  {
+    "slug": "puffy-ortopedik-yatak",
+    "name": "Puffy Ortopedik Yatak",
+    "category": "yatak-baza",
+    "badge": "Yetkili satış",
+    "featured": true,
+    "tagline": "Puffy yetkili satış noktasıyız.",
+    "description": "Puffy ortopedik yatak; bağımsız yaylı sistemi ve destek katmanıyla omurgayı doğal hizasında tutar. Mağazamızda tüm ölçüleri deneyerek seçebilirsiniz.",
+    "highlights": [
+      "Bağımsız paket yay",
+      "Ortopedik destek katmanı",
+      "Antibakteriyel kılıf",
+      "Mağazada deneme imkânı"
+    ],
+    "specs": {
+      "Tek kişilik": "90 × 190 cm",
+      "Çift kişilik": "160 × 200 cm",
+      "King": "180 × 200 cm",
+      "Yükseklik": "26 cm",
+      "Yay sistemi": "Bağımsız paket yay"
+    },
+    "materials": [
+      "Bağımsız paket yay",
+      "Visco katman",
+      "Antibakteriyel kılıf"
+    ],
+    "colors": [
+      "Standart"
+    ],
+    "image": "/products-dark/puffy-ortopedik-yatak.webp",
+    "gallery": [
+      "/products-dark/puffy-ortopedik-yatak.webp"
+    ]
+  },
+  {
+    "slug": "puffy-baza-baslik",
+    "name": "Puffy Baza & Başlık Seti",
+    "category": "yatak-baza",
+    "tagline": "Sandıklı baza ve eşleşen başlık.",
+    "description": "Amortisörlü sandıklı baza, tek elle açılır ve mevsimlik eşyalar için geniş bir hacim bırakır. Başlık kumaşı salon takımınızla eşleştirilebilir.",
+    "highlights": [
+      "Amortisörlü sandık",
+      "Eşleştirilebilir başlık kumaşı",
+      "Sağlam çelik iskelet",
+      "Tekerlekli taşıma"
+    ],
+    "specs": {
+      "Çift kişilik baza": "160 × 200 cm",
+      "King baza": "180 × 200 cm",
+      "Başlık yüksekliği": "120 cm",
+      "Sandık derinliği": "22 cm"
+    },
+    "materials": [
+      "Çelik iskelet",
+      "Döşemelik kumaş"
+    ],
+    "colors": [
+      "Antrasit",
+      "Vizon",
+      "Krem"
+    ],
+    "image": "/products-dark/puffy-baza-baslik.webp",
+    "gallery": [
+      "/products-dark/puffy-baza-baslik.webp"
+    ]
+  },
+  {
+    "slug": "ravena-berjer",
+    "name": "Ravena Berjer",
+    "category": "tekil-parcalar",
+    "tagline": "Okuma köşesi için tek koltuk.",
+    "description": "Ravena; kavisli sırtı ve yüksek kolçaklarıyla pencere kenarında ayrı bir köşe kurar. Ahşap ayakları ve kumaşı salon takımınızla eşleştirilebilir.",
+    "highlights": [
+      "Kavisli sırt",
+      "Salonla eşleşen kumaş",
+      "Masif ahşap ayak",
+      "Eşleşen puf seçeneği"
+    ],
+    "specs": {
+      "Ölçü": "80 × 85 × 95 cm",
+      "Oturum yüksekliği": "45 cm",
+      "İskelet": "Kurutulmuş kayın",
+      "Sünger": "32 dns"
+    },
+    "materials": [
+      "Kadife",
+      "Bukle",
+      "Şönil"
+    ],
+    "colors": [
+      "Yeşil çay",
+      "Toz pembe",
+      "Antrasit",
+      "Kum"
+    ],
+    "image": "/products-dark/ravena-berjer.webp",
+    "gallery": [
+      "/products-dark/ravena-berjer.webp"
+    ]
+  },
+  {
+    "slug": "terra-tv-unitesi",
+    "name": "Terra TV Ünitesi",
+    "category": "tekil-parcalar",
+    "featured": true,
+    "tagline": "Kablo düzeni düşünülmüş, sade bir duvar.",
+    "description": "Terra; alt dolabı, açık rafı ve gizli kablo kanalıyla televizyon duvarını toparlar. 75 inçe kadar ekranı taşır.",
+    "highlights": [
+      "75 inçe kadar ekran",
+      "Gizli kablo kanalı",
+      "Yavaş kapanan çekmece",
+      "İsteğe bağlı LED aydınlatma"
+    ],
+    "specs": {
+      "Ünite": "220 × 40 × 45 cm",
+      "Raf": "180 × 25 × 4 cm",
+      "Taşıma kapasitesi": "60 kg",
+      "Malzeme": "MDF lake"
+    },
+    "materials": [
+      "MDF lake",
+      "Ahşap desenli kaplama"
+    ],
+    "colors": [
+      "Antrasit",
+      "Ceviz",
+      "Beyaz"
+    ],
+    "image": "/products-dark/terra-tv-unitesi.webp",
+    "gallery": [
+      "/products-dark/terra-tv-unitesi.webp"
+    ]
+  },
+  {
+    "slug": "mono-orta-sehpa-seti",
+    "name": "Mono Orta Sehpa Seti",
+    "category": "tekil-parcalar",
+    "tagline": "Orta sehpa + iki zigon, tek çizgi.",
+    "description": "Mono; yuvarlak tablası ve ince metal ayağıyla salonun ortasında hafif durur. Zigon sehpalar birbirinin altına girer, misafir gelince ayrılır.",
+    "highlights": [
+      "Yuvarlak tabla",
+      "İç içe geçen zigonlar",
+      "Toz boya metal ayak",
+      "Çizilmeye dayanıklı yüzey"
+    ],
+    "specs": {
+      "Orta sehpa": "Ø 90 × 40 cm",
+      "Zigon (büyük)": "45 × 45 × 55 cm",
+      "Zigon (küçük)": "40 × 40 × 48 cm",
+      "Malzeme": "MDF tabla + metal ayak"
+    },
+    "materials": [
+      "MDF",
+      "Toz boya metal",
+      "Mermer desenli kaplama"
+    ],
+    "colors": [
+      "Mermer beyaz",
+      "Ceviz",
+      "Siyah"
+    ],
+    "image": "/products-dark/mono-orta-sehpa-seti.webp",
+    "gallery": [
+      "/products-dark/mono-orta-sehpa-seti.webp"
+    ]
+  }
+]

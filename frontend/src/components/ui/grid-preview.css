@@ -1,0 +1,246 @@
+/* ------------------------------------------------------------------
+   IZGARADAN ÖNİZLEMEYE (grid → preview)
+   Kaynak etkileşim: Gwen Bogaert / "grid-to-preview" demosu.
+
+   Kutulardan birinin üstüne gelindiğinde, ızgaranın KARŞI yarısında
+   büyük bir önizleme paneli açılır: panelin üstündeki opak kapak
+   artı (+) biçiminde kapanarak görseli açığa çıkarır, panelin
+   kapattığı kutular sönerek dışa doğru dağılır ve önizleme o ürünün
+   görsellerini sırayla gösterir.
+
+   Etki YALNIZCA imleçli ve geniş ekranlarda çalışır; altında sade bir
+   ızgaraya döner (bkz. bileşendeki `matchMedia` kontrolü).
+------------------------------------------------------------------ */
+
+.gtp {
+  position: relative;
+  --gtp-gap: clamp(0.75rem, 1.6vw, 1.4rem);
+}
+
+.gtp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gtp-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gtp-item {
+  position: relative;
+  min-width: 0;
+}
+
+.gtp-link {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: linear-gradient(145deg, var(--color-ink-800), var(--color-ink-900));
+}
+
+.gtp-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+}
+
+.gtp-media img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Kutunun altındaki başlık — görselin üstünde, kendi perdesiyle.
+   Perde kutusu sabit; scroll'a bağlı derinlik hareketini içindeki
+   `.gtp-caption-in` alıyor (bkz. providers/media-scrub). */
+.gtp-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  padding: clamp(0.85rem, 1.4vw, 1.25rem);
+  background: linear-gradient(
+    to top,
+    rgb(var(--scrim-rgb) / 0.82),
+    rgb(var(--scrim-rgb) / 0.28) 55%,
+    transparent
+  );
+  color: var(--color-media-fg);
+}
+
+.gtp-caption-in {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.gtp-title {
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.05vw, 1.05rem);
+  font-weight: 700;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+
+.gtp-meta {
+  font-family: var(--font-label);
+  font-size: 0.56rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-media-fg-muted);
+}
+
+/* Üstüne gelince beliren eylem şeridi (demodaki "Add to cart"). */
+.gtp-cta {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  padding: 0.6rem 0;
+  background: rgb(var(--scrim-rgb) / 0.78);
+  color: var(--color-media-fg);
+  font-family: var(--font-label);
+  font-size: 0.56rem;
+  letter-spacing: 0.24em;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 0.18s ease-out;
+  pointer-events: none;
+}
+
+.gtp-link:hover .gtp-cta,
+.gtp-link:focus-visible .gtp-cta {
+  opacity: 1;
+}
+
+/* Önizleme katmanı dar ekranlarda hiç çizilmez. */
+.gtp-previews {
+  display: none;
+}
+
+@media (min-width: 64em) {
+  .gtp-grid {
+    grid-template-columns: repeat(var(--gtp-cols, 4), minmax(0, 1fr));
+  }
+
+  /* Önizleme ızgarası, kutuların ızgarasıyla BİREBİR aynı sütun şeması ve
+     boşluğu kullanır; böylece panelin kenarları kutuların kenarlarına
+     oturur. */
+  .gtp-previews {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: grid;
+    grid-template-columns: repeat(var(--gtp-cols, 4), minmax(0, 1fr));
+    gap: var(--gtp-gap);
+    pointer-events: none;
+  }
+
+  .gtp-preview {
+    position: relative;
+    grid-row: 1 / -1;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    opacity: 0;
+  }
+
+  /* Görsel yığını: hepsi üst üste, yalnızca aktif olan görünür. */
+  .gtp-preview-images {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    overflow: hidden;
+  }
+
+  /* Kare = arkaplanlı kutu. Tema seçimi CSS'te (bkz. grid-preview.tsx):
+     `img` çifti basılsaydı GSAP galerisi koyu/aydınlık kopyalar arasında
+     da dönerdi. */
+  .gtp-preview-images .gtp-frame {
+    grid-row: 1;
+    grid-column: 1;
+    height: 100%;
+    width: 100%;
+    background-image: var(--img-dark);
+    background-size: cover;
+    background-position: 50% 50%;
+    opacity: 0;
+  }
+
+  :root[data-theme="light"] .gtp-preview-images .gtp-frame {
+    background-image: var(--img-light);
+  }
+
+  /* Görselin ÜSTÜNDEKİ opak kapak. Artı biçimindeki clip-path'i
+     kapanınca görsel açığa çıkar. */
+  .gtp-preview-cover {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: var(--color-ink-950);
+  }
+
+  .gtp-preview-caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: clamp(1.1rem, 2vw, 1.75rem);
+    background: linear-gradient(
+      to top,
+      rgb(var(--scrim-rgb) / 0.85),
+      rgb(var(--scrim-rgb) / 0.3) 55%,
+      transparent
+    );
+    color: var(--color-media-fg);
+  }
+
+  .gtp-preview-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1.8vw, 1.9rem);
+    font-weight: 800;
+    line-height: 1.05;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+  }
+
+  .gtp-preview-meta {
+    font-family: var(--font-label);
+    font-size: 0.6rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-media-fg-muted);
+    white-space: nowrap;
+  }
+}
+
+/* Hareketi azaltılmışsa etki tamamen kapalı: sade ızgara kalır. */
+@media (prefers-reduced-motion: reduce) {
+  .gtp-previews {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   AYDINLIK TEMA: fotoğrafa perde çekilmiyor.
+   Başlık şeritlerinin ve "İncele" bandının zemini kalkıyor; yazı
+   `--media-halo` ile okunuyor (hale globals.css'te tanımlı).
+------------------------------------------------------------------ */
+:root[data-theme="light"] .gtp-caption,
+:root[data-theme="light"] .gtp-preview-caption,
+:root[data-theme="light"] .gtp-cta {
+  background: none;
+}

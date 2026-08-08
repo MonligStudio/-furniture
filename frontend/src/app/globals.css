@@ -1,0 +1,647 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   TİPOGRAFİ — logodan türetildi
+   Logodaki "ESCUDO" ağır, geniş, geometrik bir grotesk; altındaki
+   "HOME CONCEPT" ise ince ve çok geniş harf aralıklı. Site bu iki
+   davranışı tekrar ediyor:
+     • Başlıklar  → Montserrat 800, BÜYÜK HARF, nötr harf aralığı
+     • Mikro etiketler → Montserrat 400, BÜYÜK HARF, 0.3em aralık
+     • Gövde metni → Manrope (nötr, iyi okunur)
+   Değişkenler src/app/layout.tsx içinde next/font ile bağlanıyor.
+--------------------------------------------------------------- */
+@theme {
+  --font-display: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  /* "Etiket" fontu: logonun alt satırındaki geniş aralıklı caps. */
+  --font-label: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+
+  /* ---------------------------------------------------------------
+     PALET — "Siyah & Kemik"
+     Logo saf siyah zeminde beyaz; site de oradan besleniyor.
+     Koyu tema SAF SİYAH (#000) zemin + kemik beyazı metin kullanır.
+     Vurgu rengi ayrı bir renk DEĞİL: kemik beyazının kendisi. Tek sıcak
+     üçüncül ton (taupe) yalnızca ince çizgi, gölge ve hover izinde
+     görünür — palet monokrom kalsın diye.
+     Ara tonlar SADECE kart/panel/input yüzeyi içindir; bölüm ayırmak
+     için kullanılmaz, site baştan sona tek zemindir.
+  --------------------------------------------------------------- */
+  --color-ink-950: #000000;
+  --color-ink-900: #070707;
+  --color-ink-850: #0c0c0c;
+  --color-ink-800: #121212; /* kart / panel yüzeyi */
+  --color-ink-700: #1b1b1b;
+  --color-ink-600: #262626;
+
+  --color-line: #1e1e1e;
+  --color-line-strong: #3a3a3a;
+
+  --color-fg: #ede8e0; /* kemik beyazı */
+  --color-fg-muted: #a29c93;
+  --color-fg-faint: #6e6862;
+
+  --color-accent: #ede8e0;
+  --color-accent-soft: #ffffff;
+  --color-accent-deep: #857a6c; /* üçüncül sıcak ton (taupe) */
+
+  /* Görsel/video ÜSTÜNDE duran metin — iki temada da kemik beyazı. */
+  --color-media-fg: #f2eee7;
+  --color-media-fg-muted: #b8b2a8;
+
+  --radius-card: 2px;
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-scene: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --animate-marquee: marquee 46s linear infinite;
+}
+
+/* ---------------------------------------------------------------
+   TEMA — koyu (varsayılan) / aydınlık
+   Aydınlık tema saf beyaz DEĞİL, kemik beyazı bir kâğıt zemin kullanır;
+   metin de saf siyah yerine mürekkep siyahıdır. Bütün bölümler yalnızca
+   bu token'lar üzerinden boyandığı için site tek düğmeyle döner.
+--------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+
+  --scrim-rgb: 0 0 0;
+  --scrim-strength: 1;
+  --shadow-rgb: 0 0 0;
+  --shadow-strength: 1;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-ink-950: #f1ede6; /* kemik beyazı kâğıt */
+  --color-ink-900: #ebe6dd;
+  --color-ink-850: #e5dfd4;
+  --color-ink-800: #ded7ca;
+  --color-ink-700: #d3cbbc;
+  --color-ink-600: #c1b8a6;
+
+  --color-line: #dcd5c8;
+  --color-line-strong: #b0a897;
+
+  --color-fg: #121212; /* mürekkep siyahı */
+  --color-fg-muted: #55504a;
+  --color-fg-faint: #837c73;
+
+  --color-accent: #121212;
+  --color-accent-soft: #000000;
+  --color-accent-deep: #8a8074;
+
+  /* Görsel ÜSTÜNDEKİ metin de aydınlık temada mürekkep.
+     Eskiden iki temada da kemik beyazıydı: gündüz çekilmiş parlak
+     fotoğrafın üstüne beyaz yazı okunsun diye siyah perde çekiliyordu ve
+     sıcak tonlu kare bu ağır siyah tülün altında yeşilimsi/çamurlu
+     görünüyordu. Aydınlık temada perde de metin de tersine döndü. */
+  --color-media-fg: #100e0c;
+  /* Fotoğrafın üstünde "sönük" bir gri kullanılmıyor: kare koyu bir
+     bölgeye denk geldiğinde okunmuyordu. Mürekkebe çok yakın. */
+  --color-media-fg-muted: #241f1a;
+
+  /* AYDINLIK TEMADA FOTOĞRAFA HİÇBİR PERDE/FİLTRE UYGULANMIYOR.
+     Kare ne ise o görünüyor; okunurluk yazının KENDİ halesinden geliyor:
+     harflerin çevresine kâğıt renginde ince bir ışık. Perde çekmek
+     (açık ya da koyu) kareyi soldurduğu için tercih edilmedi. */
+  --media-halo:
+    0 0 2px rgb(241 237 230 / 1), 0 0 5px rgb(241 237 230 / 0.98),
+    0 1px 3px rgb(241 237 230 / 0.95), 0 0 22px rgb(241 237 230 / 0.9),
+    0 0 44px rgb(241 237 230 / 0.7);
+
+  --scrim-rgb: 241 237 230;
+  --scrim-strength: 1;
+  --shadow-rgb: 40 36 30;
+  --shadow-strength: 0.45;
+}
+
+/* AYDINLIK TEMADA HEADER ŞEFFAF.
+   Eskiden arkasında kâğıt levha + blur vardı; görselin üstünde opak bir
+   şerit gibi duruyordu. Şeffaflık korundu, okunurluk yazı halesinden
+   geliyor, ton da koyulaştırıldı.
+
+   KATMAN DIŞINDA duruyor (`@layer components` içinde DEĞİL): Tailwind'in
+   `utilities` katmanı `components`tan sonra geldiği için, katmanlı bir
+   kural özgüllüğü ne olursa olsun `bg-ink-950/70` gibi bir yardımcı
+   sınıfa yeniliyordu — scroll edilince header yine levha alıyordu.
+   Katmansız kurallar bütün katmanları yener. */
+:root[data-theme="light"] header {
+  --color-fg: #100e0c;
+  --color-fg-muted: #2f2a25;
+  --color-fg-faint: #4a443d;
+  --color-accent: #100e0c;
+  background: transparent;
+  backdrop-filter: none;
+  text-shadow: var(--media-halo);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes roll-in {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes hint-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  /* `scroll-behavior: smooth` YOK: yumuşak kaydırmayı Lenis yapıyor, ikisi
+     birlikte çalışınca çapa linkleri ve programatik scroll çakışıyor. */
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.68;
+    overflow-x: hidden;
+  }
+
+  /* Başlıklar logodaki ağır grotesk karakterini taşır: kalın, büyük harf,
+     neredeyse nötr harf aralığı (sıkıştırılmış editorial görünüm YOK). */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.08;
+  }
+
+  /* Tüm sayfa tek zemin: bölümler kendi arkaplanını boyamaz. */
+  section {
+    background-color: transparent;
+  }
+
+  ::selection {
+    background: var(--color-fg);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-600);
+    border: 3px solid var(--color-ink-950);
+  }
+}
+
+@layer components {
+  /* Sayfa katmanı: sabit footer'ın üstünde duran opak yüzey. */
+  .page-layer {
+    position: relative;
+    z-index: 1;
+    background-color: var(--color-ink-950);
+  }
+
+  /* Sayfa kabı — tüm bölümler bunu kullanır. */
+  .shell {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  .section {
+    position: relative;
+    padding-block: clamp(4.5rem, 9vw, 9rem);
+  }
+
+  /* Görsel/video üstünde duran katman: arayüz token'ları görselin üstünde
+     okunacak şekilde yeniden bağlanır. Koyu temada beyaz metin + siyah
+     perde; AYDINLIK temada mürekkep metin + kemik perde (bkz. aşağıdaki
+     override ve `--color-media-fg`). */
+  .media-layer {
+    --color-fg: var(--color-media-fg);
+    --color-fg-muted: var(--color-media-fg-muted);
+    --color-fg-faint: var(--color-media-fg-muted);
+    --color-accent: var(--color-media-fg);
+    --color-accent-soft: #ffffff;
+    --color-ink-950: #000000;
+    --color-ink-800: #121212;
+    --color-line: #2c2c2c;
+    --color-line-strong: #565656;
+    --scrim-rgb: 0 0 0;
+    --scrim-strength: 1;
+    color: var(--color-media-fg);
+  }
+
+  /* Aydınlık temada görsel üstü katman da AÇIK: kemik yüzey, mürekkep
+     metin, kemik perde. */
+  :root[data-theme="light"] .media-layer {
+    --color-accent-soft: #000000;
+    --color-ink-950: #f1ede6;
+    --color-ink-800: #ded7ca;
+    --color-line: #cfc7b8;
+    --color-line-strong: #a89f8d;
+    --scrim-rgb: 241 237 230;
+  }
+
+  /* ---- Perdeler ----
+     Rengi `--scrim-rgb` veriyor: koyu temada siyah, aydınlık temada kemik.
+     Böylece aydınlık temada gündüz fotoğrafının üstüne siyah tül çekilmiyor
+     (o tül sıcak kareleri yeşilimsi/çamurlu gösteriyordu). */
+  .scrim-hero {
+    background:
+      linear-gradient(
+        to bottom,
+        rgb(var(--scrim-rgb) / 0.55) 0%,
+        rgb(var(--scrim-rgb) / 0.3) 38%,
+        rgb(var(--scrim-rgb) / 0.5) 74%,
+        rgb(var(--scrim-rgb) / 0.88) 100%
+      ),
+      radial-gradient(
+        circle at 50% 48%,
+        transparent 12%,
+        rgb(var(--scrim-rgb) / 0.5) 100%
+      );
+  }
+
+  /* Hero, aydınlık temada aynı sahnelerin gerçek gün ışığı sürümünü kullanır. */
+  /* Videonun üstünde perde YOK; kare koyu bir ana denk geldiğinde yazı
+     kaybolmasın diye sönük gri tonlar kullanılmıyor — hepsi mürekkebe
+     yakın, üstüne de hale biniyor. */
+  :root[data-theme="light"] .hero-theme-layer {
+    --color-fg: #100e0c;
+    --color-fg-muted: #241f1a;
+    --color-fg-faint: #241f1a;
+    --color-accent: #100e0c;
+    --color-accent-soft: #000000;
+    --color-ink-950: #f1ede6;
+    color: #100e0c;
+  }
+
+  :root[data-theme="light"] .hero-header {
+    --color-accent-soft: #000000;
+    --color-ink-950: #f1ede6;
+    border-color: rgb(23 20 17 / 0.22);
+    color: #100e0c;
+  }
+
+  :root[data-theme="light"] .hero-theme-layer .scrim-hero {
+    /* Gündüz görselinin rengini değiştiren beyaz/kemik perde yok. */
+    background: transparent;
+  }
+
+  .scrim-media {
+    background: linear-gradient(
+      to top,
+      rgb(var(--scrim-rgb) / 0.8),
+      rgb(var(--scrim-rgb) / 0.24) 55%,
+      rgb(var(--scrim-rgb) / 0.3)
+    );
+  }
+
+  /* Aydınlık temada perde YOK: kare hiçbir tülün altında kalmıyor.
+     Yazı, aşağıdaki hale ile okunuyor. */
+  :root[data-theme="light"] .scrim-media {
+    background: none;
+  }
+
+  /* ---- Fotoğraf üstündeki yazının halesi (yalnızca aydınlık tema) ----
+     `text-shadow` KALITIMLI: kabı işaretlemek içindeki bütün yazıya
+     yetiyor. Kendi zemini olan kutularda `.no-halo` ile kapatılıyor. */
+  :root[data-theme="light"] .hero-theme-layer,
+  :root[data-theme="light"] .media-frame .media-layer,
+  :root[data-theme="light"] .gtp-caption,
+  :root[data-theme="light"] .gtp-cta,
+  :root[data-theme="light"] .gtp-preview-caption {
+    text-shadow: var(--media-halo);
+  }
+
+  :root[data-theme="light"] .no-halo,
+  :root[data-theme="light"] .no-halo * {
+    text-shadow: none;
+  }
+
+  /* ---------------------------------------------------------------
+     ETİKET TİPOGRAFİSİ — logonun "HOME CONCEPT" satırı
+     Üç etiket varyantı da aynı davranışı paylaşır: ince ağırlık,
+     büyük harf, geniş harf aralığı.
+  --------------------------------------------------------------- */
+  .eyebrow,
+  .chapter,
+  .edge-note {
+    font-family: var(--font-label);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--color-fg-faint);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.5rem;
+    height: 1px;
+    background: var(--color-accent-deep);
+  }
+
+  /* Bölüm numarası etiketi: 03 KOLEKSİYONLAR */
+  .chapter {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.32em;
+    color: var(--color-fg-faint);
+  }
+  .chapter b {
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--color-fg);
+  }
+
+  /* Kenar notu / sayaç etiketi */
+  .edge-note {
+    font-size: 0.66rem;
+    line-height: 1.4;
+    letter-spacing: 0.26em;
+    color: var(--color-fg-muted);
+  }
+
+  /* Dev başlık — logodaki ağır grotesk. Harf aralığı sıkıştırılmaz. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    line-height: 0.98;
+  }
+
+  /* Kartlar tek zemin üzerinde "çerçeve" gibi durur. */
+  .card {
+    position: relative;
+    background: var(--color-ink-900);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    transition:
+      border-color 0.4s var(--ease-out-soft),
+      background-color 0.4s var(--ease-out-soft);
+  }
+  .card:hover {
+    border-color: var(--color-line-strong);
+    background: var(--color-ink-850);
+  }
+
+  /* Kartın üstünde ince ışık çizgisi */
+  .hairline-top::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-accent-deep),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.45s var(--ease-out-soft);
+  }
+  .card:hover.hairline-top::before {
+    opacity: 1;
+  }
+
+  /* Scroll reveal — `.is-in` sınıfı RevealEngine'den gelir.
+
+     `will-change` BİLEREK YOK: bu sınıfı sayfadaki bütün gövde metni
+     alıyor (bkz. reveal-engine.tsx), yani `will-change` yazmak her
+     paragrafı kalıcı bir birleştirici katmanına çeviriyordu — anasayfada
+     tek başına 31 katman. Geçiş yalnızca opaklık ve transform üzerinde
+     olduğu için tarayıcı katmanı zaten geçiş başlarken kendisi açıyor. */
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+    transition:
+      opacity 0.85s var(--ease-out-soft),
+      transform 0.85s var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Satır satır açılan başlık (SplitText yok — maskeli span) */
+  .line-mask {
+    display: block;
+    overflow: hidden;
+    padding-block: 0.06em;
+  }
+  .line-mask > span {
+    display: block;
+    transform: translate3d(0, 110%, 0);
+    transition: transform 1s var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .is-in .line-mask > span {
+    transform: none;
+  }
+
+  /* Sayfa yüklenir yüklenmez oynayan satır maskesi (hero) */
+  .roll {
+    display: block;
+    overflow: hidden;
+    padding-block: 0.06em;
+  }
+  .roll > * {
+    display: block;
+    animation: roll-in 1.1s var(--ease-scene) both;
+    animation-delay: var(--roll-delay, 0ms);
+  }
+
+  /* Sekme / adım geçişleri (AnimatePresence yerine saf CSS) */
+  .animate-fade-up {
+    animation: fade-up 0.55s var(--ease-out-soft) both;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: var(--animate-marquee);
+  }
+  .marquee-mask {
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+  }
+
+  /* Hero'nun altındaki kaydırma işareti */
+  .scroll-hint {
+    animation: hint-bob 2.4s ease-in-out infinite;
+  }
+
+  /* Görsel çerçevesi — fotoğraf gelene kadar boş/beyaz kalmasın. */
+  .media-frame {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background: linear-gradient(
+      145deg,
+      var(--color-ink-800),
+      var(--color-ink-900)
+    );
+  }
+
+  /* Scroll'a bağlı hareketin yazıldığı katman (bkz. providers/media-scrub).
+     Çerçeveden her yönde taşkın duruyor: GSAP bunu yukarı–aşağı kaydırırken
+     kenarda boşluk açılmasın diye. Hareket `img`e değil bu katmana
+     yazılıyor, böylece alttaki hover büyütmesiyle çakışmıyor.
+
+     TAŞMA PAYI ile HAREKET MİKTARI BİRBİRİNE BAĞLI. Katman
+     (1 + 2·pay) boyunda; gidiş `yPercent` yani KATMAN boyunun yüzdesi.
+     Kenarda boşluk açılmaması için:  amount · (1 + 2·pay) < pay.
+     Varsayılan %16 pay, %11'e kadar hareketi taşır (0.11·1.32 = 0.145).
+     Tek bir karede daha fazlası gerekiyorsa `--scrub-inset` büyütülür. */
+  .media-scrub {
+    position: absolute;
+    inset: calc(-1 * var(--scrub-inset, 16%));
+    display: block;
+    will-change: transform;
+  }
+
+  /* DERİNLİK KATMANI — `MediaFrame` kullanmayan görseller için.
+     `.media-scrub` ile aynı numara ve aynı pay hesabı. Fark, bu katmanın
+     GİRİŞ animasyonu yapmaması: onu zaten kendi bileşeni yapıyor (ürün
+     hikâyesinde maske, sahnede kare geçişi). Bkz. providers/media-scrub.
+     Sarmalayan kutu `overflow: hidden` olmalı. */
+  .depth-layer {
+    position: absolute;
+    inset: calc(-1 * var(--depth-inset, 16%));
+    display: block;
+    will-change: transform;
+  }
+
+  .depth-layer > img,
+  .depth-layer > video {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .media-frame img {
+    transition:
+      transform 0.9s var(--ease-out-soft),
+      opacity 0.25s ease;
+  }
+
+  .media-frame:hover img {
+    transform: scale(1.04);
+  }
+
+  .theme-media-dark,
+  .theme-media-light {
+    transition: opacity 0.25s ease;
+  }
+
+  .theme-media-light {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  :root[data-theme="light"] .theme-media-dark {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  :root[data-theme="light"] .theme-media-light {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* JS kapalıysa reveal içeriği gizli kalmasın */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .line-mask > span {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .line-mask > span,
+  .roll > * {
+    transform: none;
+  }
+}
