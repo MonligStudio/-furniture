@@ -209,7 +209,9 @@
   }
 
   .prc-img {
-    position: static;
+    /* `next/image fill` çocukları absolute'dur; kutu relative olmazsa
+       bütün süreç bölümüne yayılıp metinleri ve diğer adımları kapatır. */
+    position: relative;
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 10;
