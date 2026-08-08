@@ -197,10 +197,7 @@
 /* `.ch-scrim`ın aydınlık sürümüyle BİREBİR AYNI — biri değişirse geçişte
    parlaklık zıplar. Aydınlık temada perde yok. */
 :root[data-theme="light"] .ms-flip-scrim {
-  background:
-    linear-gradient(rgb(241 237 230 / 0.22), rgb(241 237 230 / 0.22)),
-    radial-gradient(circle at 50% 50%, rgb(241 237 230 / 0.24), transparent 68%),
-    linear-gradient(to top, rgb(241 237 230 / 0.62), transparent 46%);
+  background: none;
 }
 
 /* Koleksiyon adı + ürün sayısı: kopya büyürken tam ortada kalır. */

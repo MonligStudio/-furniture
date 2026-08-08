@@ -42,10 +42,7 @@
    Okunurluk yazının kendi halesinden geliyor (bkz. `--media-halo`).
    `.ms-flip-scrim` ile BİREBİR AYNI olmalı. */
 :root[data-theme="light"] .ch-scrim {
-  background:
-    linear-gradient(rgb(241 237 230 / 0.22), rgb(241 237 230 / 0.22)),
-    radial-gradient(circle at 50% 50%, rgb(241 237 230 / 0.24), transparent 68%),
-    linear-gradient(to top, rgb(241 237 230 / 0.62), transparent 46%);
+  background: none;
 }
 
 :root[data-theme="light"] .ch-cap,

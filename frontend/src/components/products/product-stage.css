@@ -148,9 +148,7 @@
 /* Aydınlık temada PERDE YOK — kare olduğu gibi duruyor. "Tüm ürünler"
    bağlantısı yazı halesiyle okunuyor; panelin kendi zemini var. */
 :root[data-theme="light"] .pd-scrim {
-  background:
-    linear-gradient(to right, rgb(241 237 230 / 0.32), transparent 48%),
-    linear-gradient(to top, rgb(241 237 230 / 0.48), transparent 42%);
+  background: none;
 }
 
 :root[data-theme="light"] .pd-back,
@@ -191,6 +189,10 @@
 .pd-nav > button:hover {
   border-color: var(--color-media-fg);
   background: rgb(var(--scrim-rgb) / 0.6);
+}
+
+:root[data-theme="light"] .pd-nav > button {
+  backdrop-filter: none;
 }
 
 /* ---- Küçük kareler (thumbnail) ---- */

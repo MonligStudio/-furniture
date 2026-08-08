@@ -242,12 +242,7 @@
 :root[data-theme="light"] .gtp-caption,
 :root[data-theme="light"] .gtp-preview-caption,
 :root[data-theme="light"] .gtp-cta {
-  background: linear-gradient(
-    to top,
-    rgb(241 237 230 / 0.84),
-    rgb(241 237 230 / 0.16) 64%,
-    transparent
-  );
+  background: none;
 }
 
 @media (max-width: 30em) {

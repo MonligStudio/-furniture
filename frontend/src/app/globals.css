@@ -137,7 +137,7 @@
 }
 
 :root[data-theme="light"] header[data-media] {
-  background: linear-gradient(to bottom, rgb(241 237 230 / 0.5), transparent);
+  background: transparent;
 }
 
 @keyframes marquee {
@@ -361,19 +361,7 @@
   }
 
   :root[data-theme="light"] .hero-theme-layer .scrim-hero {
-    background:
-      linear-gradient(
-        to bottom,
-        rgb(241 237 230 / 0.5),
-        transparent 34%,
-        rgb(241 237 230 / 0.18) 72%,
-        rgb(241 237 230 / 0.58)
-      ),
-      radial-gradient(
-        circle at 50% 48%,
-        transparent 18%,
-        rgb(241 237 230 / 0.22) 100%
-      );
+    background: transparent;
   }
 
   .scrim-media {
@@ -388,12 +376,7 @@
   /* Aydınlık temada perde YOK: kare hiçbir tülün altında kalmıyor.
      Yazı, aşağıdaki hale ile okunuyor. */
   :root[data-theme="light"] .scrim-media {
-    background: linear-gradient(
-      to top,
-      rgb(241 237 230 / 0.78),
-      rgb(241 237 230 / 0.14) 58%,
-      transparent
-    );
+    background: none;
   }
 
   /* Metin gölgeleri özellikle hareketli görsellerde pahalıdır; açık temada
