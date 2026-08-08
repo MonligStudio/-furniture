@@ -11,4 +11,8 @@ public/products/
 public/collections/
 public/catalog/
 public/showroom/
-public/video/
+public/video/*
+!public/video/hero-dark-static.mp4
+!public/video/hero-light-day-static.mp4
+!public/video/hero-poster-dark-static.webp
+!public/video/hero-poster-light-day.webp
