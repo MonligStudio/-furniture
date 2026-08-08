@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ArrowDown } from "lucide-react";
 import { hero } from "@/content/home";
+import { publicAsset } from "@/lib/paths";
 import { site } from "@/content/site";
 
 /**
@@ -104,10 +105,10 @@ export function HeroVideo() {
           loop
           playsInline
           preload="metadata"
-          poster="/video/hero-poster-dark-static.webp"
+          poster={publicAsset("/video/hero-poster-dark-static.webp")}
           aria-hidden
         >
-          <source src="/video/hero-dark-static.mp4" type="video/mp4" />
+          <source src={publicAsset("/video/hero-dark-static.mp4")} type="video/mp4" />
         </video>
 
         <video
@@ -117,10 +118,10 @@ export function HeroVideo() {
           loop
           playsInline
           preload="metadata"
-          poster="/video/hero-poster-light-day.webp"
+          poster={publicAsset("/video/hero-poster-light-day.webp")}
           aria-hidden
         >
-          <source src="/video/hero-light-day-static.mp4" type="video/mp4" />
+          <source src={publicAsset("/video/hero-light-day-static.mp4")} type="video/mp4" />
         </video>
       </span>
 

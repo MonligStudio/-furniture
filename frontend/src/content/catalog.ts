@@ -7,6 +7,7 @@
 import catalogsJson from "./data/catalogs.json";
 import categoriesJson from "./data/categories.json";
 import productsJson from "./data/products.json";
+import { publicAsset } from "@/lib/paths";
 
 export type Category = {
   slug: string;
@@ -50,9 +51,27 @@ export type Catalog = {
    anahtarlarını ayrı ayrı çıkarıyor, `Record<string, string>` ile
    karşılaştıramıyor). Şekil yukarıdaki tiplerle doğrulandığı için
    `unknown` üzerinden dönüştürülüyor. */
-export const categories = categoriesJson as unknown as Category[];
-export const products = productsJson as unknown as Product[];
-export const catalogs = catalogsJson as unknown as Catalog[];
+const rawCategories = categoriesJson as unknown as Category[];
+const rawProducts = productsJson as unknown as Product[];
+const rawCatalogs = catalogsJson as unknown as Catalog[];
+
+export const categories = rawCategories.map((category) => ({
+  ...category,
+  image: publicAsset(category.image),
+}));
+
+export const products = rawProducts.map((product) => ({
+  ...product,
+  image: publicAsset(product.image),
+  gallery: product.gallery.map(publicAsset),
+}));
+
+export const catalogs = rawCatalogs.map((catalog) => ({
+  ...catalog,
+  cover: publicAsset(catalog.cover),
+  pages: catalog.pages.map(publicAsset),
+  pdfUrl: catalog.pdfUrl ? publicAsset(catalog.pdfUrl) : null,
+}));
 
 export const featuredProducts = products.filter((product) => product.featured);
 

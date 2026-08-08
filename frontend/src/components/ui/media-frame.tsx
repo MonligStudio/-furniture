@@ -1,12 +1,19 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { publicAsset } from "@/lib/paths";
 
 /** `/products-dark/foo.webp` → `/products-light/foo.webp` */
 export function lightMediaSrc(src: string) {
-  if (/^\/[^/]+-dark\//.test(src)) {
+  if (src.includes("-dark/")) {
     return src.replace("-dark/", "-light/");
   }
-  return src.replace(/^\/([^/]+)\//, "/$1-light/");
+
+  const prefix = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  const relative = prefix && src.startsWith(`${prefix}/`)
+    ? src.slice(prefix.length)
+    : src;
+
+  return publicAsset(relative.replace(/^\/([^/]+)\//, "/$1-light/"));
 }
 
 /**
@@ -68,7 +75,7 @@ export function MediaFrame({
         data-scrub-amount={scrubAmount}
       >
         <Image
-          src={src}
+          src={publicAsset(src)}
           alt={alt}
           fill
           sizes={sizes}
@@ -76,7 +83,7 @@ export function MediaFrame({
           className={cn("theme-media-dark object-cover", imageClassName)}
         />
         <Image
-          src={lightSrc ?? lightMediaSrc(src)}
+          src={publicAsset(lightSrc ?? lightMediaSrc(src))}
           alt=""
           aria-hidden
           fill

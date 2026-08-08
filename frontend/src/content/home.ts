@@ -8,6 +8,8 @@
  * yayına çıkmadan önce firmayla teyit edilmeli.
  */
 
+import { publicAsset } from "@/lib/paths";
+
 export const hero = {
   /* Başındaki yıl `site.founded`'dan geliyor: "1993 · Adana / Hayalpark" */
   eyebrow: "Adana · Hayalpark",
@@ -76,7 +78,7 @@ export const process = {
       title: "Mağaza ziyareti",
       body: "Showroom'da takımları deneyin. Randevu şart değil; hafta içi öğleden sonra en sakin saatler.",
       duration: "1 saat",
-      image: "/process-dark/01-showroom-visit.webp",
+      image: publicAsset("/process-dark/01-showroom-visit.webp"),
       alt: "Mobilya mağazasında koltuğu deneyen müşteriler ve onlara yardımcı olan danışman",
     },
     {
@@ -84,7 +86,7 @@ export const process = {
       title: "Ölçü ve keşif",
       body: "Adana içinde ücretsiz ölçü hizmeti. Salonun planı, kapı genişliği ve asansör ölçüsü birlikte alınır.",
       duration: "1–2 gün",
-      image: "/process-dark/02-measurement.webp",
+      image: publicAsset("/process-dark/02-measurement.webp"),
       alt: "Salonda lazer metreyle duvar ve kapı ölçüsü alan keşif ekibi",
     },
     {
@@ -92,7 +94,7 @@ export const process = {
       title: "Kumaş ve renk seçimi",
       body: "Kartela üzerinden kumaş, ayak ve dikiş rengi seçilir. Numune isteyip evde ışığa tutmanızı öneririz.",
       duration: "Aynı gün",
-      image: "/process-dark/03-fabric-selection.webp",
+      image: publicAsset("/process-dark/03-fabric-selection.webp"),
       alt: "Oda ışığında karşılaştırılan kumaş kartelaları, ayak ve dikiş örnekleri",
     },
     {
@@ -100,7 +102,7 @@ export const process = {
       title: "Üretim",
       body: "Sipariş İnegöl'e geçer. Stoktaki ürünlerde bu adım atlanır, özel ölçüde süre modele göre değişir.",
       duration: "2–5 hafta",
-      image: "/process-dark/04-production.webp",
+      image: publicAsset("/process-dark/04-production.webp"),
       alt: "Atölyede özel ölçü koltuğun kumaşını uygulayan döşeme ustaları",
     },
     {
@@ -108,7 +110,7 @@ export const process = {
       title: "Teslimat ve montaj",
       body: "Kendi ekibimizle teslim edip kuruyoruz, ambalajı da biz topluyoruz. Kurulum sonrası kontrol birlikte yapılır.",
       duration: "1 gün",
-      image: "/process-dark/05-delivery-installation.webp",
+      image: publicAsset("/process-dark/05-delivery-installation.webp"),
       alt: "Müşterinin evinde koltuk modüllerini kurup ambalajı toplayan montaj ekibi",
     },
   ],

@@ -152,3 +152,13 @@ edilmeli:
 Fiyat bilgisi bilinçli olarak yazılmadı; ürün detayında "fiyat için
 arayın" yönlendirmesi var.
 # -furniture
+
+## GitHub Pages
+
+`main` dalına gönderilen her değişiklik `.github/workflows/deploy-pages.yml`
+ile statik olarak derlenir ve GitHub Pages'a yayınlanır. Üretilen ana dosya
+`frontend/out/index.html` olur; alt sayfalar da kendi klasörlerinde
+`index.html` olarak çıkar.
+
+İlk yayın için GitHub'da **Settings → Pages → Build and deployment → Source**
+alanından **GitHub Actions** seçilmelidir.
