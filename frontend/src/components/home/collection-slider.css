@@ -125,7 +125,6 @@
   z-index: 3;
   border: 1px solid color-mix(in oklab, var(--color-media-fg) 55%, transparent);
   background: rgb(var(--scrim-rgb) / 0.55);
-  backdrop-filter: blur(8px);
   padding: 0.7rem 1.1rem;
   font-family: var(--font-label);
   font-size: 0.56rem;
@@ -198,7 +197,10 @@
 /* `.ch-scrim`ın aydınlık sürümüyle BİREBİR AYNI — biri değişirse geçişte
    parlaklık zıplar. Aydınlık temada perde yok. */
 :root[data-theme="light"] .ms-flip-scrim {
-  background: none;
+  background:
+    linear-gradient(rgb(241 237 230 / 0.22), rgb(241 237 230 / 0.22)),
+    radial-gradient(circle at 50% 50%, rgb(241 237 230 / 0.24), transparent 68%),
+    linear-gradient(to top, rgb(241 237 230 / 0.62), transparent 46%);
 }
 
 /* Koleksiyon adı + ürün sayısı: kopya büyürken tam ortada kalır. */
@@ -217,7 +219,7 @@
 
 :root[data-theme="light"] .ms-flip-cap {
   color: #171411;
-  text-shadow: var(--media-halo);
+  text-shadow: none;
 }
 
 .ms-flip-title {

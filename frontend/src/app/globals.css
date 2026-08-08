@@ -102,14 +102,9 @@
      bölgeye denk geldiğinde okunmuyordu. Mürekkebe çok yakın. */
   --color-media-fg-muted: #241f1a;
 
-  /* AYDINLIK TEMADA FOTOĞRAFA HİÇBİR PERDE/FİLTRE UYGULANMIYOR.
-     Kare ne ise o görünüyor; okunurluk yazının KENDİ halesinden geliyor:
-     harflerin çevresine kâğıt renginde ince bir ışık. Perde çekmek
-     (açık ya da koyu) kareyi soldurduğu için tercih edilmedi. */
-  --media-halo:
-    0 0 2px rgb(241 237 230 / 1), 0 0 5px rgb(241 237 230 / 0.98),
-    0 1px 3px rgb(241 237 230 / 0.95), 0 0 22px rgb(241 237 230 / 0.9),
-    0 0 44px rgb(241 237 230 / 0.7);
+  /* Büyük blur'lu çoklu text-shadow hareket eden katmanları her karede
+     yeniden boyatıyordu. Okunurluk artık ucuz, sabit gradientlerle gelir. */
+  --media-halo: none;
 
   --scrim-rgb: 241 237 230;
   --scrim-strength: 1;
@@ -134,7 +129,15 @@
   --color-accent: #100e0c;
   background: transparent;
   backdrop-filter: none;
-  text-shadow: var(--media-halo);
+  text-shadow: none;
+}
+
+:root[data-theme="light"] header[data-scrolled]:not([data-media]) {
+  background: rgb(241 237 230 / 0.94);
+}
+
+:root[data-theme="light"] header[data-media] {
+  background: linear-gradient(to bottom, rgb(241 237 230 / 0.5), transparent);
 }
 
 @keyframes marquee {
@@ -332,8 +335,19 @@
   }
 
   :root[data-theme="light"] .hero-theme-layer .scrim-hero {
-    /* Gündüz görselinin rengini değiştiren beyaz/kemik perde yok. */
-    background: transparent;
+    background:
+      linear-gradient(
+        to bottom,
+        rgb(241 237 230 / 0.5),
+        transparent 34%,
+        rgb(241 237 230 / 0.18) 72%,
+        rgb(241 237 230 / 0.58)
+      ),
+      radial-gradient(
+        circle at 50% 48%,
+        transparent 18%,
+        rgb(241 237 230 / 0.22) 100%
+      );
   }
 
   .scrim-media {
@@ -348,18 +362,22 @@
   /* Aydınlık temada perde YOK: kare hiçbir tülün altında kalmıyor.
      Yazı, aşağıdaki hale ile okunuyor. */
   :root[data-theme="light"] .scrim-media {
-    background: none;
+    background: linear-gradient(
+      to top,
+      rgb(241 237 230 / 0.78),
+      rgb(241 237 230 / 0.14) 58%,
+      transparent
+    );
   }
 
-  /* ---- Fotoğraf üstündeki yazının halesi (yalnızca aydınlık tema) ----
-     `text-shadow` KALITIMLI: kabı işaretlemek içindeki bütün yazıya
-     yetiyor. Kendi zemini olan kutularda `.no-halo` ile kapatılıyor. */
+  /* Metin gölgeleri özellikle hareketli görsellerde pahalıdır; açık temada
+     kontrastı yukarıdaki sabit perdeler sağlar. */
   :root[data-theme="light"] .hero-theme-layer,
   :root[data-theme="light"] .media-frame .media-layer,
   :root[data-theme="light"] .gtp-caption,
   :root[data-theme="light"] .gtp-cta,
   :root[data-theme="light"] .gtp-preview-caption {
-    text-shadow: var(--media-halo);
+    text-shadow: none;
   }
 
   :root[data-theme="light"] .no-halo,
@@ -596,24 +614,52 @@
     transform: scale(1.04);
   }
 
-  .theme-media-dark,
   .theme-media-light {
-    transition: opacity 0.25s ease;
-  }
-
-  .theme-media-light {
-    visibility: hidden;
-    opacity: 0;
+    display: none;
   }
 
   :root[data-theme="light"] .theme-media-dark {
-    visibility: hidden;
-    opacity: 0;
+    display: none;
   }
 
   :root[data-theme="light"] .theme-media-light {
-    visibility: visible;
-    opacity: 1;
+    display: block;
+  }
+}
+
+@media (max-width: 47.99em) {
+  body {
+    font-size: 0.96rem;
+    line-height: 1.62;
+  }
+
+  .shell {
+    padding-inline: max(1rem, env(safe-area-inset-left));
+  }
+
+  .section {
+    padding-block: clamp(3.5rem, 14vw, 5rem);
+  }
+
+  .display {
+    overflow-wrap: anywhere;
+  }
+
+  /* Mobilde parallax motoru kurulmaz; taşkın katman ve kalıcı compositor
+     belleği de bırakılmaz. */
+  .media-scrub,
+  .depth-layer {
+    inset: 0;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .media-frame:hover img {
+    transform: none;
+  }
+
+  header {
+    backdrop-filter: none !important;
   }
 }
 

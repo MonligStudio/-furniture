@@ -37,10 +37,10 @@ export function ClosingCta() {
             geliyoruz.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex w-full max-w-sm flex-col items-stretch justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
             <a
               href={site.contact.phoneHref}
-              className="inline-flex h-12 items-center gap-2 rounded-none bg-accent px-7 font-label text-[0.7rem] tracking-[0.18em] text-ink-950 uppercase transition-colors duration-300 hover:bg-accent-soft"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-none bg-accent px-7 font-label text-[0.7rem] tracking-[0.18em] text-ink-950 uppercase transition-colors duration-300 hover:bg-accent-soft"
             >
               <Phone className="size-4" strokeWidth={1.5} aria-hidden />
               {site.contact.phone}
@@ -50,7 +50,7 @@ export function ClosingCta() {
               href={site.contact.mapsUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-12 items-center gap-2 rounded-none border border-line-strong px-7 font-label text-[0.7rem] tracking-[0.18em] text-fg uppercase transition-colors duration-300 hover:border-accent hover:text-accent"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-none border border-line-strong px-7 font-label text-[0.7rem] tracking-[0.18em] text-fg uppercase transition-colors duration-300 hover:border-accent hover:text-accent"
             >
               <MapPin className="size-4" strokeWidth={1.5} aria-hidden />
               Yol tarifi
@@ -58,7 +58,7 @@ export function ClosingCta() {
 
             <Link
               href="/iletisim"
-              className="edge-note group inline-flex items-center gap-3 border-b border-line pb-2 text-fg transition-colors duration-300 hover:border-accent hover:text-accent"
+              className="edge-note group inline-flex items-center justify-center gap-3 border-b border-line pb-2 text-fg transition-colors duration-300 hover:border-accent hover:text-accent"
             >
               Mesaj bırakın
               <ArrowRight

@@ -35,12 +35,12 @@ export function CatalogViewer({
         className="animate-fade-up"
       />
 
-      <div className="flex items-center justify-between gap-6 border-t border-line pt-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-4 sm:gap-6">
         <span className="edge-note text-fg-faint">
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </span>
 
-        <div className="flex flex-wrap justify-center gap-1.5">
+        <div className="order-3 flex w-full flex-wrap justify-center gap-1.5 sm:order-none sm:w-auto">
           {pages.map((page, i) => (
             <button
               key={page}

@@ -162,15 +162,15 @@ export function Process() {
               /* Sonraki adım öncekinin ÜSTÜNE açılıyor: z-index artan. */
               style={{ zIndex: i + 1 }}
             >
-              {/* `loading="eager"` ŞART: kareler üst üste duruyor ve maske
-                  açılınca ALTTAKİ anında görünmeli. Tembel yüklemede
-                  alttaki kare henüz inmemiş oluyordu — maske çalışıyor ama
-                  altından fotoğraf yerine boş zemin çıkıyordu. */}
+              {/* Bölüm aşağıda olduğu için kareler tembel yüklenir. Masaüstü
+                  yığınında aynı koordinatta olduklarından bölüm yaklaşınca
+                  tarayıcı hepsini birlikte hazırlar; mobil ilk yüklemede ise
+                  on görseli birden indirmez. */}
               <Image
                 src={step.image}
                 alt={step.alt}
                 fill
-                loading="eager"
+                loading="lazy"
                 sizes="(max-width: 768px) 100vw, 544px"
                 className="theme-media-dark object-cover"
               />
@@ -179,7 +179,7 @@ export function Process() {
                 alt=""
                 aria-hidden
                 fill
-                loading="eager"
+                loading="lazy"
                 sizes="(max-width: 768px) 100vw, 544px"
                 className="theme-media-light object-cover"
               />

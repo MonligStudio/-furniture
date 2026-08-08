@@ -44,7 +44,13 @@ export function resetScroll() {
 
 export function SmoothScroll() {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    /* Dokunmatik cihazlarda yerli kaydırma daha düşük gecikmeli ve daha az
+       pil tüketir. Lenis yalnızca ince işaretçili geniş ekranlarda çalışır. */
+    if (
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce), (pointer: coarse), (max-width: 47.99em)",
+      ).matches
+    ) return;
     /* `?lenis=0` — gömülü önizleme sekmelerinde rAF kısılabildiği için
        yumuşak kaydırmayı kapatıp yerli scroll'a düşmenin yolu. */
     if (new URLSearchParams(window.location.search).get("lenis") === "0") return;

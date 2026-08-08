@@ -58,7 +58,13 @@ export function MediaScrub() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    /* Mobilde her görsel için sürekli transform/tilt hesabı yapmak yerine
+       normal belge akışı kullanılır. Masaüstündeki derinlik korunur. */
+    if (
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce), (pointer: coarse), (max-width: 47.99em)",
+      ).matches
+    ) return;
 
     gsap.registerPlugin(ScrollTrigger);
 

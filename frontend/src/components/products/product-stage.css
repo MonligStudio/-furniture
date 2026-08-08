@@ -148,12 +148,14 @@
 /* Aydınlık temada PERDE YOK — kare olduğu gibi duruyor. "Tüm ürünler"
    bağlantısı yazı halesiyle okunuyor; panelin kendi zemini var. */
 :root[data-theme="light"] .pd-scrim {
-  background: none;
+  background:
+    linear-gradient(to right, rgb(241 237 230 / 0.32), transparent 48%),
+    linear-gradient(to top, rgb(241 237 230 / 0.48), transparent 42%);
 }
 
 :root[data-theme="light"] .pd-back,
 :root[data-theme="light"] .pd-nav {
-  text-shadow: var(--media-halo);
+  text-shadow: none;
 }
 
 /* ---- Sol altta gezinme ---- */
@@ -282,5 +284,33 @@
      boşluğunu o veriyor — ikisi üst üste binince kutu sağdan taşıyordu. */
   .pd-back {
     top: clamp(5rem, 10vh, 6.5rem);
+  }
+}
+
+@media (max-width: 47.99em) {
+  .pd-media {
+    height: 60svh;
+  }
+
+  .pd-panel {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .pd-nav {
+    top: calc(60svh - 4rem);
+    right: 1rem;
+    left: 1rem;
+    overflow-x: auto;
+  }
+
+  .pd-nav > button {
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: 0 0 auto;
+    backdrop-filter: none;
+  }
+
+  .pd-thumbs {
+    min-width: 0;
   }
 }

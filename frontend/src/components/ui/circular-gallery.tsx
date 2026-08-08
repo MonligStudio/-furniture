@@ -1,7 +1,14 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { cn } from "@/lib/utils";
+import "./circular-gallery.css";
 
 /**
  * DAİRESEL GALERİ — 3B halka üzerinde duran kartlar.
@@ -33,6 +40,16 @@ const DEG_PER_PX = 0.22;
 const FRICTION = 0.93;
 /** Savrulmanın kendi kendine dönüşe bırakıldığı eşik. */
 const SETTLE = 0.03;
+const COMPACT_QUERY = "(max-width: 47.99em), (pointer: coarse)";
+
+const subscribeCompact = (callback: () => void) => {
+  const query = window.matchMedia(COMPACT_QUERY);
+  query.addEventListener("change", callback);
+  return () => query.removeEventListener("change", callback);
+};
+
+const getCompact = () => window.matchMedia(COMPACT_QUERY).matches;
+const getServerCompact = () => false;
 
 export function CircularGallery({
   items,
@@ -48,6 +65,11 @@ export function CircularGallery({
   autoRotateSpeed?: number;
 }) {
   const [grabbing, setGrabbing] = useState(false);
+  const compact = useSyncExternalStore(
+    subscribeCompact,
+    getCompact,
+    getServerCompact,
+  );
 
   const rootRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -88,6 +110,17 @@ export function CircularGallery({
    * Scroll ederken bu, kare bütçesinden bedava alınan bir paydı.
    */
   useEffect(() => {
+    if (compact) {
+      const ring = ringRef.current;
+      if (ring) {
+        ring.style.transform = "none";
+        Array.from(ring.children).forEach((card) => {
+          (card as HTMLElement).style.opacity = "1";
+        });
+      }
+      return;
+    }
+
     render();
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -142,9 +175,10 @@ export function CircularGallery({
       document.removeEventListener("visibilitychange", sync);
       stop();
     };
-  }, [autoRotateSpeed, render]);
+  }, [autoRotateSpeed, compact, render]);
 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (compact) return;
     dragRef.current = { id: event.pointerId, x: event.clientX };
     velocityRef.current = 0;
     setGrabbing(true);
@@ -158,6 +192,7 @@ export function CircularGallery({
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (compact) return;
     const drag = dragRef.current;
     if (!drag || drag.id !== event.pointerId) return;
 
@@ -203,7 +238,7 @@ export function CircularGallery({
       onPointerCancel={onPointerUp}
       onKeyDown={onKeyDown}
       className={cn(
-        "relative flex h-full w-full touch-pan-y items-center justify-center select-none focus:outline-none",
+        "cg relative flex h-full w-full touch-pan-y items-center justify-center select-none focus:outline-none",
         grabbing ? "cursor-grabbing" : "cursor-grab",
         className,
       )}
@@ -212,13 +247,13 @@ export function CircularGallery({
     >
       <div
         ref={ringRef}
-        className="relative h-full w-full"
+        className="cg-ring relative h-full w-full"
         style={{ transformStyle: "preserve-3d" }}
       >
         {items.map((item, i) => (
           <figure
             key={item.name}
-            className="absolute top-1/2 left-1/2 -mt-[11rem] -ml-[10.5rem] h-[22rem] w-[21rem]"
+            className="cg-card absolute top-1/2 left-1/2 -mt-[11rem] -ml-[10.5rem] h-[22rem] w-[21rem]"
             style={{
               transform: `rotateY(${i * anglePerItem}deg) translateZ(${radius}px)`,
             }}

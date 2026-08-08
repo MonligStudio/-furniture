@@ -14,9 +14,9 @@ import { cn } from "@/lib/utils";
  * Koyu / aydınlık tema düğmesi.
  *
  * Geçiş `document.startViewTransition` ile yapılıyor: yeni tema, sayfanın
- * ALT ORTASINDAN dışarı doğru genişleyen bulanık bir daire olarak açılır.
- * Tarayıcı desteklemiyorsa ya da kullanıcı hareketi azaltmışsa tema
- * animasyonsuz değişir.
+ * alt ortasından dışarı doğru açılır. Tam ekran blur kaldırıldı; özellikle
+ * açık temada her kareyi yeniden boyatıp kaydırmayı takılı hissettiriyordu.
+ * Dokunmatik/dar ekranlarda geçiş anlıktır.
  *
  * İkon değişimi saf CSS ile (`.animate-fade-up`) yapılıyor — JS tabanlı bir
  * animasyon kütüphanesine bağlanırsa, rAF'ın kısıldığı ortamlarda (arka
@@ -39,16 +39,14 @@ html[data-theme-vt="active"]::view-transition-old(root) {
 }
 html[data-theme-vt="active"]::view-transition-new(root) {
   mix-blend-mode: normal;
-  animation: escudo-theme-reveal 780ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation: escudo-theme-reveal 480ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 @keyframes escudo-theme-reveal {
   from {
     clip-path: circle(0% at ${VT_ORIGIN});
-    filter: blur(9px);
   }
   to {
     clip-path: circle(150% at ${VT_ORIGIN});
-    filter: blur(0px);
   }
 }
 `;
@@ -56,6 +54,10 @@ html[data-theme-vt="active"]::view-transition-new(root) {
 const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const prefersSimpleTransition = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(max-width: 47.99em), (pointer: coarse)").matches;
 
 export function useThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme();
@@ -80,7 +82,11 @@ export function useThemeToggle() {
   const toggle = () => {
     const next = isDark ? "light" : "dark";
 
-    if (prefersReducedMotion() || !("startViewTransition" in document)) {
+    if (
+      prefersReducedMotion() ||
+      prefersSimpleTransition() ||
+      !("startViewTransition" in document)
+    ) {
       setTheme(next);
       return;
     }

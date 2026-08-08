@@ -128,7 +128,7 @@
 }
 
 /* Dokunmatikte hover yok; şerit hiç açılmıyor, satırlar sade kalıyor. */
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
   .menu-wrap .marquee {
     display: none;
   }

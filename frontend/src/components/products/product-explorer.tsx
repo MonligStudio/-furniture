@@ -110,7 +110,7 @@ export function ProductExplorer() {
                 ))}
               </div>
 
-              <div className="flex items-center gap-5">
+              <div className="flex flex-col items-stretch gap-5 sm:flex-row sm:items-center">
                 <label className="flex flex-1 items-center gap-3 border-b border-line pb-2 lg:w-64 lg:flex-none">
                   <Search
                     className="size-4 shrink-0 text-fg-faint"

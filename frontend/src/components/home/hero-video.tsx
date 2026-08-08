@@ -136,7 +136,7 @@ export function HeroVideo() {
             {hero.eyebrow}
           </span>
 
-          <h1 className="display mt-7 max-w-[16ch] text-[clamp(1.8rem,4.6vw,3.6rem)]">
+          <h1 className="display mt-5 max-w-[16ch] text-[clamp(1.8rem,4.6vw,3.6rem)] sm:mt-7">
             {hero.lines.map((line, i) => (
               <span
                 key={line}
@@ -150,18 +150,18 @@ export function HeroVideo() {
             ))}
           </h1>
 
-          <p className="edge-note mt-7 text-fg-muted">{hero.claim}</p>
+          <p className="edge-note mt-5 text-fg-muted sm:mt-7">{hero.claim}</p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-2.5">
+          <div className="mt-7 flex w-full max-w-sm flex-col items-stretch justify-center gap-2.5 sm:mt-10 sm:w-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href="/urunler"
-              className="no-halo inline-flex h-11 items-center bg-fg px-6 font-label text-[0.62rem] tracking-[0.22em] text-ink-950 uppercase transition-opacity duration-300 hover:opacity-80"
+              className="no-halo inline-flex h-11 items-center justify-center bg-fg px-6 font-label text-[0.62rem] tracking-[0.22em] text-ink-950 uppercase transition-opacity duration-300 hover:opacity-80"
             >
               Koleksiyonu gör
             </Link>
             <Link
               href="/katalog"
-              className="inline-flex h-11 items-center border border-fg/70 bg-ink-950/10 px-6 font-label text-[0.62rem] tracking-[0.22em] text-fg uppercase transition-colors duration-300 hover:border-fg hover:bg-fg/10"
+              className="inline-flex h-11 items-center justify-center border border-fg/70 bg-ink-950/10 px-6 font-label text-[0.62rem] tracking-[0.22em] text-fg uppercase transition-colors duration-300 hover:border-fg hover:bg-fg/10"
             >
               Dijital katalog
             </Link>
@@ -170,7 +170,7 @@ export function HeroVideo() {
       </div>
 
       {/* Kaydırma işareti */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-5 z-10 flex justify-center">
+      <div className="pointer-events-none absolute inset-x-0 bottom-5 z-10 hidden justify-center sm:flex">
         <span className="scroll-hint edge-note flex flex-col items-center gap-1.5 text-fg-muted">
           <ArrowDown className="size-3.5" strokeWidth={1.5} aria-hidden />
           {hero.scrollHint}

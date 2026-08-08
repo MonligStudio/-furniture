@@ -106,6 +106,8 @@ export function Header() {
   return (
     <>
       <header
+        data-scrolled={scrolled ? "" : undefined}
+        data-media={onMedia ? "" : undefined}
         className={cn(
           /* Çizgi header'ın kendisinde: shell kabının içinde değil, tam
              genişlikte — ekranın bir ucundan diğerine uzanır. */
@@ -151,7 +153,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="site-menu"
             aria-label={open ? "Menüyü kapat" : "Menüyü aç"}
-            className="inline-flex size-8 items-center justify-center justify-self-start border border-current/30 transition-colors duration-300 hover:border-accent hover:text-accent lg:hidden"
+            className="inline-flex size-10 items-center justify-center justify-self-start border border-current/30 transition-colors duration-300 hover:border-accent hover:text-accent sm:size-8 lg:hidden"
           >
             {open ? (
               <X className="size-3.5" strokeWidth={1.5} aria-hidden />
@@ -178,7 +180,7 @@ export function Header() {
                   tema
                 </span>
               }
-              className="h-7 gap-1.5 border border-current/30 px-2 text-fg transition-colors duration-300 hover:border-accent hover:text-accent sm:px-2.5"
+              className="h-10 min-w-10 gap-1.5 border border-current/30 px-2 text-fg transition-colors duration-300 hover:border-accent hover:text-accent sm:h-8 sm:min-w-0 sm:px-2.5 lg:h-7"
             />
 
             <a

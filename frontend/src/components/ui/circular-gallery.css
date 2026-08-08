@@ -1,0 +1,42 @@
+/* Telefonda 3B halka ve sürekli rAF yerine doğal, yatay kayan kartlar. */
+@media (max-width: 47.99em), (pointer: coarse) {
+  .cg {
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    perspective: none !important;
+    touch-action: pan-x pan-y;
+  }
+
+  .cg::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cg-ring {
+    display: flex;
+    width: max-content;
+    gap: 1rem;
+    padding-inline: 1.25rem;
+    transform: none !important;
+    transform-style: flat !important;
+  }
+
+  .cg-card {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: min(82vw, 21rem) !important;
+    height: calc(100% - 1rem) !important;
+    flex: 0 0 min(82vw, 21rem);
+    margin: 0 !important;
+    opacity: 1 !important;
+    transform: none !important;
+    scroll-snap-align: center;
+  }
+
+  .cg-card > div {
+    padding: 1.25rem;
+  }
+}

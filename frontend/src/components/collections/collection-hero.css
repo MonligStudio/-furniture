@@ -42,12 +42,15 @@
    Okunurluk yazının kendi halesinden geliyor (bkz. `--media-halo`).
    `.ms-flip-scrim` ile BİREBİR AYNI olmalı. */
 :root[data-theme="light"] .ch-scrim {
-  background: none;
+  background:
+    linear-gradient(rgb(241 237 230 / 0.22), rgb(241 237 230 / 0.22)),
+    radial-gradient(circle at 50% 50%, rgb(241 237 230 / 0.24), transparent 68%),
+    linear-gradient(to top, rgb(241 237 230 / 0.62), transparent 46%);
 }
 
 :root[data-theme="light"] .ch-cap,
 :root[data-theme="light"] .ch-foot {
-  text-shadow: var(--media-halo);
+  text-shadow: none;
 }
 
 /* Perde olmadığı için saydam gri tonlar yetmiyor: etiketler de neredeyse
@@ -113,6 +116,34 @@
 @media (min-width: 60em) {
   .ch-grid {
     grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (max-width: 47.99em) {
+  .ch {
+    min-height: 43rem;
+  }
+
+  .ch-cap {
+    justify-content: flex-start;
+    padding-top: clamp(8.5rem, 24svh, 11rem);
+  }
+
+  .ch-foot {
+    padding-bottom: 1.25rem;
+  }
+
+  .ch-grid {
+    gap: 1.25rem;
+  }
+
+  .ch-specs {
+    gap: 0.8rem 1.35rem;
+    padding-top: 0.9rem;
+  }
+
+  .ch-specs dd {
+    font-size: 1rem;
   }
 }
 

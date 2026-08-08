@@ -38,9 +38,13 @@ export function SiteFooter() {
       const reduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
+      const compact = window.matchMedia("(max-width: 47.99em)").matches;
 
-      gsap.set(chars, { yPercent: reduced ? 0 : 120 });
-      gsap.set(lines, { yPercent: reduced ? 0 : 100 });
+      gsap.set(chars, { yPercent: reduced || compact ? 0 : 120 });
+      gsap.set(lines, { yPercent: reduced || compact ? 0 : 100 });
+
+      /* Mobil footer normal akışta; sabit perde animasyonuna ihtiyacı yok. */
+      if (compact) return;
 
       /* Açılış birden çok kez tetiklenebiliyor (onEnter + her refresh);
          tween'ler baştan başlayıp yazıları zıplatmasın diye tek yönlü kapı. */
